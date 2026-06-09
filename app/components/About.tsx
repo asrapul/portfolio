@@ -4,30 +4,63 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiMapPin, FiBookOpen, FiMail, FiCheck } from "react-icons/fi";
+import { useLang } from "../context/LangContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { value: "2+", label: "Years Learning" },
-  { value: "10+", label: "Projects Built" },
-  { value: "100%", label: "Passion Driven" },
-];
-
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLang();
+
+  const infoItems = [
+    { icon: <FiMapPin size={13} />, text: t.about.location },
+    { icon: <FiBookOpen size={13} />, text: t.about.school },
+    { icon: <FiMail size={13} />, text: t.about.email },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".about-left", {
-        x: -40, opacity: 0, duration: 1, ease: "power3.out",
-        clearProps: "transform,opacity",
-        scrollTrigger: { trigger: ".about-left", start: "top 80%" },
+      // Section label & heading stagger
+      gsap.from(".about-label", {
+        y: 20, opacity: 0, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".about-label", start: "top 85%" },
       });
+      gsap.from(".about-headline", {
+        y: 30, opacity: 0, duration: 0.9, ease: "power3.out",
+        scrollTrigger: { trigger: ".about-headline", start: "top 85%" },
+        delay: 0.1,
+      });
+
+      // Paragraphs stagger
+      gsap.from(".about-para", {
+        y: 24, opacity: 0, duration: 0.75, stagger: 0.12, ease: "power3.out",
+        clearProps: "transform,opacity",
+        scrollTrigger: { trigger: ".about-para", start: "top 83%" },
+      });
+
+      // Checklist items
+      gsap.from(".about-check-item", {
+        x: -20, opacity: 0, duration: 0.6, stagger: 0.09, ease: "power3.out",
+        clearProps: "transform,opacity",
+        scrollTrigger: { trigger: ".about-checklist", start: "top 82%" },
+      });
+
+      // Info pills
+      gsap.from(".about-pill", {
+        scale: 0.85, opacity: 0, duration: 0.5, stagger: 0.08, ease: "back.out(1.4)",
+        clearProps: "transform,opacity",
+        scrollTrigger: { trigger: ".about-pills", start: "top 85%" },
+      });
+
+      // Right column
       gsap.from(".about-right", {
         x: 40, opacity: 0, duration: 1, ease: "power3.out",
         clearProps: "transform,opacity",
         scrollTrigger: { trigger: ".about-right", start: "top 80%" },
       });
+
+      // Stats
       gsap.from(".stat-item", {
         y: 20, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
         clearProps: "transform,opacity",
@@ -35,14 +68,8 @@ export default function About() {
       });
     }, sectionRef);
 
-    const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
-    return () => {
-      ctx.revert();
-      clearTimeout(refreshTimeout);
-    };
+    const refreshTimeout = setTimeout(() => ScrollTrigger.refresh(), 500);
+    return () => { ctx.revert(); clearTimeout(refreshTimeout); };
   }, []);
 
   return (
@@ -62,7 +89,7 @@ export default function About() {
             marginBottom: "5rem",
           }}
         >
-          {stats.map((s) => (
+          {t.about.stats.map((s) => (
             <div
               key={s.label}
               className="stat-item"
@@ -77,18 +104,18 @@ export default function About() {
             >
               <div
                 style={{
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "'Rolide', 'Syne', sans-serif",
                   fontSize: "clamp(2rem, 4vw, 2.75rem)",
-                  fontWeight: 800,
+                  fontWeight: 700,
                   color: "var(--accent-light)",
-                  letterSpacing: "-0.03em",
+                  letterSpacing: "0.01em",
                   lineHeight: 1,
                   marginBottom: "0.4rem",
                 }}
               >
                 {s.value}
               </div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 500 }}>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 500, fontFamily: "'Rolide', 'Syne', sans-serif" }}>
                 {s.label}
               </div>
             </div>
@@ -97,67 +124,68 @@ export default function About() {
 
         {/* Main about layout */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "5rem",
-            alignItems: "start",
-          }}
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}
           className="about-grid"
         >
           {/* Left */}
           <div className="about-left">
-            <span className="section-label">About Me</span>
-            <h2 className="text-h2" style={{ marginBottom: "1.5rem" }}>
-              Building with purpose,{" "}
-              <span style={{ color: "var(--accent-light)" }}>not just pixels.</span>
+            <span className="section-label about-label">{t.about.label}</span>
+            <h2
+              className="about-headline"
+              style={{
+                fontFamily: "'Rolide', 'Syne', sans-serif",
+                fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
+                fontWeight: 700,
+                lineHeight: 1.15,
+                letterSpacing: "0.01em",
+                color: "var(--text-primary)",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {t.about.headline}{" "}
+              <span style={{ color: "var(--accent-light)" }}>{t.about.headline_accent}</span>
             </h2>
-            <p className="text-body-lg" style={{ marginBottom: "1.25rem" }}>
-              Saya adalah siswa Rekayasa Perangkat Lunak di SMK Telkom Makassar yang memiliki
-              minat besar pada pengembangan web modern, software engineering, dan teknologi digital.
+
+            <p
+              className="about-para text-body-lg"
+              style={{ marginBottom: "1.25rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "1rem", lineHeight: 1.8 }}
+            >
+              {t.about.p1}
             </p>
-            <p className="text-body" style={{ marginBottom: "1.25rem" }}>
-              Saya aktif mempelajari React.js, Next.js, serta berbagai teknologi frontend untuk
-              membangun aplikasi yang cepat, responsif, dan memiliki pengalaman pengguna yang baik.
+            <p
+              className="about-para text-body"
+              style={{ marginBottom: "1.25rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "0.95rem", lineHeight: 1.75 }}
+            >
+              {t.about.p2}
             </p>
-            <p className="text-body" style={{ marginBottom: "2rem" }}>
-              Selain pengembangan web, saya juga tertarik pada cyber security, network administration,
-              dan desain antarmuka. Tujuan saya adalah menjadi software engineer profesional yang mampu
-              menciptakan produk digital yang memberikan dampak nyata bagi banyak orang.
+            <p
+              className="about-para text-body"
+              style={{ marginBottom: "2rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "0.95rem", lineHeight: 1.75 }}
+            >
+              {t.about.p3}
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-              {[
-                "Frontend Development (React, Next.js)",
-                "UI/UX Design & Implementation",
-                "Network Administration & Cyber Security",
-                "Selalu belajar teknologi baru",
-              ].map((item) => (
+            <div className="about-checklist" style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+              {(t.about.skills as string[]).map((item: string) => (
                 <div
                   key={item}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                    fontSize: "0.95rem",
-                    color: "var(--text-secondary)",
-                  }}
+                  className="about-check-item"
+                  style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.95rem", color: "var(--text-secondary)", fontFamily: "'Rolide', 'Syne', sans-serif" }}
                 >
                   <span
                     style={{
-                      width: 18, height: 18,
+                      width: 20, height: 20,
                       borderRadius: "50%",
                       background: "var(--accent-dim)",
-                      border: "1px solid var(--accent)",
+                      border: "1px solid rgba(255,255,255,0.15)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
+                      color: "var(--accent-light)",
                     }}
                   >
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                    <FiCheck size={11} strokeWidth={3} />
                   </span>
                   {item}
                 </div>
@@ -165,14 +193,11 @@ export default function About() {
             </div>
 
             {/* Info pills */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem", marginTop: "2rem" }}>
-              {[
-                { icon: "📍", text: "Makassar, Indonesia" },
-                { icon: "🎓", text: "SMK Telkom Makassar" },
-                { icon: "✉️", text: "asyrafulamal06@gmail.com" },
-              ].map((item) => (
+            <div className="about-pills" style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem", marginTop: "2rem" }}>
+              {infoItems.map((item) => (
                 <div
                   key={item.text}
+                  className="about-pill"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -183,9 +208,10 @@ export default function About() {
                     borderRadius: "100px",
                     fontSize: "0.8rem",
                     color: "var(--text-muted)",
+                    fontFamily: "'Rolide', 'Syne', sans-serif",
                   }}
                 >
-                  <span>{item.icon}</span>
+                  {item.icon}
                   {item.text}
                 </div>
               ))}
@@ -194,7 +220,7 @@ export default function About() {
 
           {/* Right */}
           <div className="about-right" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            {/* Profile image card */}
+            {/* Profile image */}
             <div
               style={{
                 borderRadius: "var(--radius-xl)",
@@ -212,7 +238,6 @@ export default function About() {
                 style={{ objectFit: "cover", objectPosition: "center top" }}
                 priority
               />
-              {/* Gradient overlay at bottom */}
               <div
                 style={{
                   position: "absolute",
@@ -222,19 +247,11 @@ export default function About() {
                   zIndex: 1,
                 }}
               />
-              {/* Name overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "1.25rem",
-                  left: "1.25rem",
-                  zIndex: 2,
-                }}
-              >
-                <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1rem", color: "var(--text-primary)" }}>
+              <div style={{ position: "absolute", bottom: "1.25rem", left: "1.25rem", zIndex: 2 }}>
+                <div style={{ fontFamily: "'Rolide', 'Syne', sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-primary)" }}>
                   Andi Asyraful Amal Ilham
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontFamily: "'Rolide', 'Syne', sans-serif" }}>
                   Frontend Developer · Makassar, Indonesia
                 </div>
               </div>
@@ -250,8 +267,16 @@ export default function About() {
                 borderRadius: "var(--radius-md)",
               }}
             >
-              <p style={{ fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.7, fontStyle: "italic" }}>
-                &ldquo;Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang.&rdquo;
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.7,
+                  fontStyle: "italic",
+                  fontFamily: "'Rolide', 'Syne', sans-serif",
+                }}
+              >
+                {t.about.quote}
               </p>
             </div>
           </div>
@@ -264,9 +289,7 @@ export default function About() {
           .stat-item { padding: 1.25rem !important; }
         }
         @media (max-width: 480px) {
-          div[style*="grid-template-columns: repeat(3, 1fr)"] {
-            grid-template-columns: 1fr !important;
-          }
+          .stats-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

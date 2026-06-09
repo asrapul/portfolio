@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import { LangProvider } from "./context/LangContext";
 
 export const metadata: Metadata = {
-  title: "Andi Asyraful",
+  title: "Andi Asyraful — Frontend Developer Portfolio",
   description:
     "Portfolio of Andi Asyraful Amal Ilham, a Frontend Developer & Software Engineering Student from Makassar, Indonesia. Building modern, fast, and impactful web experiences with React, Next.js, and more.",
   keywords: [
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Andi Asyraful Amal Ilham" }],
   openGraph: {
     title: "Andi Asyraful Amal Ilham — Frontend Developer Portfolio",
-    description: "Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang.",
+    description: "Building modern, fast, and meaningful digital experiences for many people.",
     type: "website",
   },
 };
@@ -47,9 +48,10 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js"
           strategy="beforeInteractive"
         />
-        {children}
+        <LangProvider>
+          {children}
+        </LangProvider>
       </body>
     </html>
   );
 }
-

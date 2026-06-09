@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "hire": "Hire me"
+  },
+  "hero": {
+    "available": "Available for work",
+    "role": "Frontend Developer · Student",
+    "headline": "Crafting Digital Experiences.",
+    "intro": "Hi, I'm",
+    "name": "Andi Asyraful Amal Ilham",
+    "subrole": "— a Frontend Developer & Software Engineering Student",
+    "tagline": "Building modern, fast, and meaningful digital experiences. From elegant UI to smooth interactions — I build products that matter.",
+    "cta_projects": "View Projects",
+    "cta_contact": "Contact Me",
+    "find_me": "Find me on",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "label": "About Me",
+    "headline": "Building with purpose,",
+    "headline_accent": "not just pixels.",
+    "p1": "I am a Software Engineering student at SMK Telkom Makassar with a strong interest in modern web development, software engineering, and digital technology.",
+    "p2": "I actively learn React.js, Next.js, and various frontend technologies to build fast, responsive applications with great user experiences.",
+    "p3": "Beyond web development, I am also interested in cyber security, network administration, and interface design. My goal is to become a professional software engineer capable of creating digital products that make a real impact.",
+    "skills": [
+      "Frontend Development (React, Next.js)",
+      "UI/UX Design & Implementation",
+      "Network Administration & Cyber Security",
+      "Always learning new technologies"
+    ],
+    "location": "Makassar, Indonesia",
+    "school": "SMK Telkom Makassar",
+    "email": "asyrafulamal06@gmail.com",
+    "quote": "\"Building modern, fast, and meaningful digital experiences for many people.\"",
+    "stats": [
+      { "value": "2+", "label": "Years Learning" },
+      { "value": "10+", "label": "Projects Built" },
+      { "value": "100%", "label": "Passion Driven" }
+    ]
+  },
+  "skills": {
+    "label": "Expertise",
+    "headline": "My",
+    "headline_accent": "Tech Stack",
+    "description": "Technologies and tools I use to build modern, responsive, and high-quality web applications.",
+    "also": "Also skilled in:"
+  },
+  "projects": {
+    "label": "Projects",
+    "headline": "Selected",
+    "headline_accent": "Works",
+    "live": "Live Demo",
+    "source": "Source"
+  },
+  "experience": {
+    "label": "Journey",
+    "headline": "Experience &",
+    "headline_accent": "Growth",
+    "growing": "Professional Journey",
+    "growing_desc": "A timeline of my professional training, hands-on internships, and academic achievements in software engineering.",
+    "stats": [
+      { "value": "2+", "label": "Years Learning" },
+      { "value": "12+", "label": "Projects Built" },
+      { "value": "4+", "label": "Certifications" },
+      { "value": "1", "label": "Competitions Won" }
+    ],
+    "timeline": [
+      {
+        "period": "2025",
+        "role": "Frontend Developer Intern",
+        "company": "Ashari Tech",
+        "type": "internship",
+        "description": "Worked on modern web development projects using React and Next.js. Contributed to responsive user interfaces, reusable component development, and collaborative development workflows in a professional environment.",
+        "tags": ["Next.js", "React", "TypeScript", "Frontend Development"]
+      },
+      {
+        "period": "2025",
+        "role": "Web & Graphic Design Competition Winner",
+        "company": "HMP-TI (DIES NATALIS)",
+        "type": "achievement",
+        "description": "Won the Web Programming and Graphic Design competition organized by HMP-TI. Demonstrated problem-solving, frontend development, design thinking, and creativity under competitive conditions.",
+        "tags": ["Web Programming", "Graphic Design", "Competition Winner"]
+      },
+      {
+        "period": "2024",
+        "role": "Frontend Development Graduate",
+        "company": "Telkom DigiUp",
+        "type": "training",
+        "description": "Completed intensive frontend engineering training specializing in React.js. Gained practical hands-on experience in component design, state management, and modern development standards.",
+        "tags": ["React.js", "Frontend", "Training"]
+      },
+      {
+        "period": "2023 — Present",
+        "role": "Software Engineering Student",
+        "company": "SMK Telkom Makassar",
+        "type": "education",
+        "description": "Studying software engineering core concepts, algorithm designs, web development, and networking principles, consistently scoring top grades in technical subjects.",
+        "tags": ["Software Engineering", "Web", "Mobile", "Networking"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "headline": "Let's build something",
+    "headline_accent": "remarkable.",
+    "subtitle": "Have a project or want to collaborate? I'm always open to interesting discussions and new opportunities. Don't hesitate to reach out!",
+    "form_title": "Send a message",
+    "form_subtitle": "I usually reply within one business day.",
+    "name_label": "Your Name",
+    "email_label": "Email Address",
+    "message_label": "Message",
+    "name_placeholder": "John Doe",
+    "email_placeholder": "john@example.com",
+    "message_placeholder": "Tell me about your project...",
+    "submit": "Send Message",
+    "success_title": "Message sent!",
+    "success_body": "I'll reply within 24 hours."
+  },
+  "footer": {
+    "copyright": "Built with",
+    "available": "Available for work"
+  }
+}

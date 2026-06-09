@@ -1,20 +1,19 @@
+"use client";
+
+import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
+import { useLang } from "../context/LangContext";
+
+const socials = [
+  { href: "https://github.com/asrapul", label: "GitHub", icon: <FiGithub size={15} /> },
+  { href: "https://www.linkedin.com/in/andiasyraful/", label: "LinkedIn", icon: <FiLinkedin size={15} /> },
+  { href: "https://www.instagram.com/asrapulamal/", label: "Instagram", icon: <FiInstagram size={15} /> },
+];
+
+const navKeys = ["home", "about", "skills", "projects", "experience", "contact"] as const;
+
 export default function Footer() {
+  const { t } = useLang();
   const year = new Date().getFullYear();
-
-  const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
-  ];
-
-  const socials = [
-    { href: "https://github.com/asrapul", label: "GitHub", icon: "GH" },
-    { href: "https://www.linkedin.com/in/andiasyraful/", label: "LinkedIn", icon: "in" },
-    { href: "https://www.instagram.com/asrapulamal/", label: "Instagram", icon: "IG" },
-  ];
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -43,57 +42,27 @@ export default function Footer() {
             marginBottom: "2.5rem",
           }}
         >
-          {/* Logo */}
+          {/* Logo — Rolide font */}
           <a
             href="#home"
             onClick={(e) => handleClick(e, "#home")}
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "1.4rem",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              color: "var(--text-primary)",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.4rem",
-            }}
+            className="footer-logo"
+            aria-label="Go to top"
           >
-            <span
-              style={{
-                display: "inline-block",
-                width: 8, height: 8,
-                borderRadius: "50%",
-                background: "var(--accent)",
-                boxShadow: "0 0 10px var(--accent)",
-              }}
-            />
+            <span className="footer-logo-dot" />
             asrap.
           </a>
 
           {/* Nav links */}
           <nav style={{ display: "flex", gap: "0.25rem", flexWrap: "wrap" }}>
-            {navLinks.map((link) => (
+            {navKeys.map((key) => (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                style={{
-                  padding: "0.4rem 0.85rem",
-                  fontSize: "0.85rem",
-                  color: "var(--text-muted)",
-                  borderRadius: "100px",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-muted)";
-                  (e.currentTarget as HTMLElement).style.background = "transparent";
-                }}
+                key={key}
+                href={`#${key}`}
+                onClick={(e) => handleClick(e, `#${key}`)}
+                className="footer-nav-link"
               >
-                {link.label}
+                {t.nav[key as keyof typeof t.nav]}
               </a>
             ))}
           </nav>
@@ -107,30 +76,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                style={{
-                  width: 36, height: 36,
-                  borderRadius: "50%",
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid var(--border)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  color: "var(--text-muted)",
-                  letterSpacing: "0.02em",
-                  transition: "all 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--accent-light)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
-                  (e.currentTarget as HTMLElement).style.background = "var(--accent-dim)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-muted)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                }}
+                className="footer-social-btn"
               >
                 {s.icon}
               </a>
@@ -158,7 +104,7 @@ export default function Footer() {
           }}
         >
           <p style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
-            © {year} Andi Asyraful Amal Ilham. Built with{" "}
+            © {year} Andi Asyraful Amal Ilham. {t.footer.copyright}{" "}
             <span style={{ color: "var(--accent-light)" }}>Next.js</span> &{" "}
             <span style={{ color: "var(--accent-light)" }}>GSAP</span>.
           </p>
@@ -175,13 +121,60 @@ export default function Footer() {
               }}
             />
             <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-              Available for work
+              {t.footer.available}
             </span>
           </div>
         </div>
       </div>
 
       <style>{`
+        .footer-logo {
+          font-family: 'Rolide', 'Syne', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          letter-spacing: 0.03em;
+          color: var(--text-primary);
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          transition: opacity 0.2s;
+        }
+        .footer-logo:hover { opacity: 0.7; }
+        .footer-logo-dot {
+          display: inline-block;
+          width: 8px; height: 8px;
+          border-radius: 50%;
+          background: var(--accent);
+          box-shadow: 0 0 10px var(--accent);
+        }
+        .footer-nav-link {
+          padding: 0.4rem 0.85rem;
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          border-radius: 100px;
+          transition: all 0.2s;
+        }
+        .footer-nav-link:hover {
+          color: var(--text-primary);
+          background: rgba(255,255,255,0.04);
+        }
+        .footer-social-btn {
+          width: 36px; height: 36px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid var(--border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--text-muted);
+          transition: all 0.25s;
+        }
+        .footer-social-btn:hover {
+          color: var(--text-primary);
+          border-color: var(--accent);
+          background: var(--accent-dim);
+          transform: translateY(-2px);
+        }
         @keyframes footerPulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLang } from "../context/LangContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,6 +94,7 @@ const projects = [
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLang();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -123,7 +125,7 @@ export default function Projects() {
       <div className="container">
         {/* Header */}
         <div className="projects-title" style={{ marginBottom: "3.5rem" }}>
-          <span className="section-label">Work</span>
+          <span className="section-label">{t.projects.label}</span>
           <div
             style={{
               display: "flex",
@@ -134,17 +136,9 @@ export default function Projects() {
             }}
           >
             <h2 className="text-h2">
-              Selected{" "}
-              <span style={{ color: "var(--accent-light)" }}>Projects</span>
+              {t.projects.headline}{" "}
+              <span style={{ color: "var(--accent-light)" }}>{t.projects.headline_accent}</span>
             </h2>
-            <p
-              className="text-body"
-              style={{ maxWidth: 360, textAlign: "right" }}
-              id="projects-sub"
-            >
-              A curated selection of work I&apos;m proud of. Each project
-              solves a real problem, built with intention.
-            </p>
           </div>
         </div>
 
@@ -254,35 +248,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       onMouseMove={handleMouseMove}
       onMouseLeave={() => { handleMouseLeave(); handleMouseLeaveImage(); }}
       onMouseEnter={handleMouseEnter}
-      style={{
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-xl)",
-        overflow: "hidden",
-        cursor: "pointer",
-        transition: "border-color 0.35s, box-shadow 0.35s",
-        transformStyle: "preserve-3d",
-        willChange: "transform",
-        gridColumn: isLarge ? "1 / -1" : "auto",
-        display: "flex",
-        flexDirection: isLarge ? undefined : "column",
-      }}
     >
       {/* Visual area */}
       <div
         ref={imageRef}
-        className={isLarge ? "project-card-image-large" : ""}
+        className={`project-card-image ${isLarge ? "project-card-image-large" : ""}`}
         style={{
           background: project.gradient,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          overflow: "hidden",
-          minHeight: isLarge ? undefined : "180px",
-          flex: isLarge ? undefined : "none",
-          transition: "transform 0.5s",
-          width: isLarge ? undefined : "100%",
         }}
       >
         {/* Grid lines in background */}
@@ -298,22 +270,27 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
         {/* Main visual emoji/icon or mockup image */}
         {project.image ? (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              sizes={isLarge ? "(max-width: 768px) 100vw, 40vw" : "(max-width: 768px) 100vw, 30vw"}
-              style={{ objectFit: isLarge ? "contain" : "cover", objectPosition: "center", padding: isLarge ? "1.5rem" : "0" }}
-              priority={isLarge}
-            />
+          <div className="browser-mockup-container">
+            <div className="browser-shell">
+              <div className="browser-header">
+                <div className="browser-dots">
+                  <span className="browser-dot dot-red"></span>
+                  <span className="browser-dot dot-yellow"></span>
+                  <span className="browser-dot dot-green"></span>
+                </div>
+                <div className="browser-address">burger-loin.vercel.app</div>
+              </div>
+              <div className="browser-screen">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes={isLarge ? "(max-width: 768px) 100vw, 40vw" : "(max-width: 768px) 100vw, 30vw"}
+                  className="browser-image"
+                  priority={isLarge}
+                />
+              </div>
+            </div>
           </div>
         ) : (
           <div

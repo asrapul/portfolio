@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "skills": "Keahlian",
+    "projects": "Proyek",
+    "experience": "Pengalaman",
+    "contact": "Kontak",
+    "hire": "Hire me"
+  },
+  "hero": {
+    "available": "Tersedia untuk bekerja",
+    "role": "Frontend Developer · Pelajar",
+    "headline": "Crafting Digital Experiences.",
+    "intro": "Halo, saya",
+    "name": "Andi Asyraful Amal Ilham",
+    "subrole": "— Frontend Developer & Siswa Rekayasa Perangkat Lunak",
+    "tagline": "Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang. Dari UI yang elegan hingga interaksi yang mulus — saya membangun produk yang nyata.",
+    "cta_projects": "Lihat Proyek",
+    "cta_contact": "Hubungi Saya",
+    "find_me": "Temukan saya di",
+    "scroll": "Gulir"
+  },
+  "about": {
+    "label": "Tentang Saya",
+    "headline": "Membangun dengan tujuan,",
+    "headline_accent": "bukan sekadar piksel.",
+    "p1": "Saya adalah siswa Rekayasa Perangkat Lunak di SMK Telkom Makassar yang memiliki minat besar pada pengembangan web modern, software engineering, dan teknologi digital.",
+    "p2": "Saya aktif mempelajari React.js, Next.js, serta berbagai teknologi frontend untuk membangun aplikasi yang cepat, responsif, dan memiliki pengalaman pengguna yang baik.",
+    "p3": "Selain pengembangan web, saya juga tertarik pada cyber security, network administration, dan desain antarmuka. Tujuan saya adalah menjadi software engineer profesional yang mampu menciptakan produk digital yang memberikan dampak nyata bagi banyak orang.",
+    "skills": [
+      "Frontend Development (React, Next.js)",
+      "Desain & Implementasi UI/UX",
+      "Network Administration & Cyber Security",
+      "Selalu belajar teknologi baru"
+    ],
+    "location": "Makassar, Indonesia",
+    "school": "SMK Telkom Makassar",
+    "email": "asyrafulamal06@gmail.com",
+    "quote": "\"Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang.\"",
+    "stats": [
+      { "value": "2+", "label": "Tahun Belajar" },
+      { "value": "10+", "label": "Proyek Dibuat" },
+      { "value": "100%", "label": "Passion Driven" }
+    ]
+  },
+  "skills": {
+    "label": "Keahlian",
+    "headline": "Tech Stack",
+    "headline_accent": "Saya",
+    "description": "Teknologi dan tools yang saya gunakan untuk membangun aplikasi web yang modern, responsif, dan berkualitas tinggi.",
+    "also": "Juga mahir dalam:"
+  },
+  "projects": {
+    "label": "Proyek",
+    "headline": "Karya",
+    "headline_accent": "Terpilih",
+    "live": "Live Demo",
+    "source": "Source"
+  },
+  "experience": {
+    "label": "Perjalanan",
+    "headline": "Pengalaman &",
+    "headline_accent": "Pertumbuhan",
+    "growing": "Perjalanan Profesional",
+    "growing_desc": "Lini masa pelatihan profesional, magang praktis, dan pencapaian akademik saya di bidang rekayasa perangkat lunak.",
+    "stats": [
+      { "value": "2+", "label": "Tahun Belajar" },
+      { "value": "12+", "label": "Proyek Dibuat" },
+      { "value": "4+", "label": "Sertifikasi" },
+      { "value": "1", "label": "Kompetisi Dimenangkan" }
+    ],
+    "timeline": [
+      {
+        "period": "2025",
+        "role": "Magang Frontend Developer",
+        "company": "Ashari Tech",
+        "type": "internship",
+        "description": "Bekerja pada proyek pengembangan web modern menggunakan React dan Next.js. Berkontribusi dalam pengembangan antarmuka pengguna yang responsif, pembuatan komponen reusable, dan alur kerja kolaboratif dalam lingkungan profesional.",
+        "tags": ["Next.js", "React", "TypeScript", "Pengembangan Frontend"]
+      },
+      {
+        "period": "2025",
+        "role": "Pemenang Kompetisi Desain Web & Grafis",
+        "company": "HMP-TI (DIES NATALIS)",
+        "type": "achievement",
+        "description": "Memenangkan kompetisi Web Programming dan Desain Grafis yang diselenggarakan oleh HMP-TI. Menunjukkan kemampuan pemecahan masalah, pengembangan frontend, design thinking, dan kreativitas di bawah kondisi kompetitif.",
+        "tags": ["Pemrograman Web", "Desain Grafis", "Pemenang Kompetisi"]
+      },
+      {
+        "period": "2024",
+        "role": "Lulusan Frontend Development",
+        "company": "Telkom DigiUp",
+        "type": "training",
+        "description": "Menyelesaikan pelatihan rekayasa frontend intensif spesialisasi React.js. Memperoleh pengalaman praktis dalam desain komponen, manajemen state, dan standar pengembangan modern.",
+        "tags": ["React.js", "Frontend", "Pelatihan"]
+      },
+      {
+        "period": "2023 — Sekarang",
+        "role": "Siswa Rekayasa Perangkat Lunak",
+        "company": "SMK Telkom Makassar",
+        "type": "education",
+        "description": "Mempelajari konsep dasar rekayasa perangkat lunak, desain algoritma, pengembangan web, dan prinsip jaringan, serta konsisten meraih nilai tertinggi dalam mata pelajaran teknis.",
+        "tags": ["Rekayasa Perangkat Lunak", "Web", "Mobile", "Jaringan"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "Kontak",
+    "headline": "Mari bangun sesuatu yang",
+    "headline_accent": "luar biasa.",
+    "subtitle": "Punya proyek atau ingin berkolaborasi? Saya selalu terbuka untuk diskusi menarik dan peluang baru. Jangan ragu untuk menghubungi!",
+    "form_title": "Kirim pesan",
+    "form_subtitle": "Biasanya saya membalas dalam satu hari kerja.",
+    "name_label": "Nama Kamu",
+    "email_label": "Alamat Email",
+    "message_label": "Pesan",
+    "name_placeholder": "John Doe",
+    "email_placeholder": "john@example.com",
+    "message_placeholder": "Ceritakan tentang proyek kamu...",
+    "submit": "Kirim Pesan",
+    "success_title": "Pesan terkirim!",
+    "success_body": "Saya akan membalas dalam waktu 24 jam."
+  },
+  "footer": {
+    "copyright": "Dibuat dengan",
+    "available": "Tersedia untuk bekerja"
+  }
+}

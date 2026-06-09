@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Rolide';
+  src: url('/fonts/Rolide-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 /* ================================
    DESIGN TOKENS
@@ -95,10 +103,17 @@ button {
 
 .text-hero {
   font-family: "Rolide", "Rolide-Expanded", "Syne", sans-serif;
-  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+  .text-hero {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    line-height: 1.2;
+  }
 }
 
 .text-h2 {
@@ -467,20 +482,138 @@ section {
 }
 
 /* ================================
-   PROJECT CARD RESPONSIVE LAYOUT
+   PROJECT CARD & BROWSER MOCKUP RESPONSIVE LAYOUT
 ================================ */
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.35s, box-shadow 0.35s;
+  transform-style: preserve-3d;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.02);
+}
+
 .project-card-large {
-  display: flex !important;
-  flex-direction: row !important;
   grid-column: 1 / -1 !important;
+  flex-direction: row !important;
   min-height: 380px !important;
+}
+
+.project-card-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s;
+  width: 100%;
+  min-height: 180px;
+  flex: none;
 }
 
 .project-card-image-large {
   flex: 0 0 45% !important;
-  position: relative !important;
-  overflow: hidden !important;
   min-height: 380px !important;
+}
+
+/* Browser Mockup Shell */
+.browser-mockup-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.browser-shell {
+  width: 100%;
+  height: 100%;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+}
+
+.browser-header {
+  height: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.browser-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.browser-dot.dot-red { background: #ff5f56; }
+.browser-dot.dot-yellow { background: #ffbd2e; }
+.browser-dot.dot-green { background: #27c93f; }
+
+.browser-address {
+  margin: 0 auto;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 3px;
+  padding: 0px 1.5rem;
+  font-family: monospace;
+  max-width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-screen {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.browser-image {
+  object-fit: cover !important;
+  object-position: top center !important;
+  transition: transform 0.6s ease;
+}
+
+/* Hover effects */
+.project-card:hover .browser-image {
+  transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
@@ -491,7 +624,15 @@ section {
   .project-card-image-large {
     flex: none !important;
     width: 100% !important;
-    min-height: 280px !important;
+    min-height: 250px !important;
+  }
+  .browser-mockup-container {
+    padding: 0.75rem; /* Less padding on mobile to maximize space */
+    width: 100%;
+    height: 250px;
+  }
+  .browser-shell {
+    height: 100%;
   }
 }
 
