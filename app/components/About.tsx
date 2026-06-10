@@ -115,7 +115,7 @@ export default function About() {
               >
                 {s.value}
               </div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 500, fontFamily: "'Rolide', 'Syne', sans-serif" }}>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 500 }}>
                 {s.label}
               </div>
             </div>
@@ -148,19 +148,19 @@ export default function About() {
 
             <p
               className="about-para text-body-lg"
-              style={{ marginBottom: "1.25rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "1rem", lineHeight: 1.8 }}
+              style={{ marginBottom: "1.25rem", fontSize: "1rem", lineHeight: 1.8 }}
             >
               {t.about.p1}
             </p>
             <p
               className="about-para text-body"
-              style={{ marginBottom: "1.25rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "0.95rem", lineHeight: 1.75 }}
+              style={{ marginBottom: "1.25rem", fontSize: "0.95rem", lineHeight: 1.75 }}
             >
               {t.about.p2}
             </p>
             <p
               className="about-para text-body"
-              style={{ marginBottom: "2rem", fontFamily: "'Rolide', 'Syne', sans-serif", fontSize: "0.95rem", lineHeight: 1.75 }}
+              style={{ marginBottom: "2rem", fontSize: "0.95rem", lineHeight: 1.75 }}
             >
               {t.about.p3}
             </p>
@@ -170,7 +170,7 @@ export default function About() {
                 <div
                   key={item}
                   className="about-check-item"
-                  style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.95rem", color: "var(--text-secondary)", fontFamily: "'Rolide', 'Syne', sans-serif" }}
+                  style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.95rem", color: "var(--text-secondary)" }}
                 >
                   <span
                     style={{
@@ -208,7 +208,6 @@ export default function About() {
                     borderRadius: "100px",
                     fontSize: "0.8rem",
                     color: "var(--text-muted)",
-                    fontFamily: "'Rolide', 'Syne', sans-serif",
                   }}
                 >
                   {item.icon}
@@ -273,7 +272,6 @@ export default function About() {
                   color: "var(--text-secondary)",
                   lineHeight: 1.7,
                   fontStyle: "italic",
-                  fontFamily: "'Rolide', 'Syne', sans-serif",
                 }}
               >
                 {t.about.quote}

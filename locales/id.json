@@ -10,14 +10,15 @@
   },
   "hero": {
     "available": "Tersedia untuk bekerja",
-    "role": "Frontend Developer · Pelajar",
-    "headline": "Crafting Digital Experiences.",
+    "role": "Frontend Developer · React / Next.js Specialist",
+    "headline": "Saya Membangun Antarmuka yang Bekerja.",
     "intro": "Halo, saya",
     "name": "Andi Asyraful Amal Ilham",
     "subrole": "— Frontend Developer & Siswa Rekayasa Perangkat Lunak",
-    "tagline": "Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang. Dari UI yang elegan hingga interaksi yang mulus — saya membangun produk yang nyata.",
+    "tagline": "Saya membangun aplikasi web berkinerja tinggi, aksesibel, dan siap produksi menggunakan React dan Next.js. Kode bersih, desain bermakna, dan hasil nyata.",
     "cta_projects": "Lihat Proyek",
     "cta_contact": "Hubungi Saya",
+    "cta_cv": "Unduh CV",
     "find_me": "Temukan saya di",
     "scroll": "Gulir"
   },
@@ -25,23 +26,23 @@
     "label": "Tentang Saya",
     "headline": "Membangun dengan tujuan,",
     "headline_accent": "bukan sekadar piksel.",
-    "p1": "Saya adalah siswa Rekayasa Perangkat Lunak di SMK Telkom Makassar yang memiliki minat besar pada pengembangan web modern, software engineering, dan teknologi digital.",
-    "p2": "Saya aktif mempelajari React.js, Next.js, serta berbagai teknologi frontend untuk membangun aplikasi yang cepat, responsif, dan memiliki pengalaman pengguna yang baik.",
-    "p3": "Selain pengembangan web, saya juga tertarik pada cyber security, network administration, dan desain antarmuka. Tujuan saya adalah menjadi software engineer profesional yang mampu menciptakan produk digital yang memberikan dampak nyata bagi banyak orang.",
+    "p1": "Saya siswa Rekayasa Perangkat Lunak di SMK Telkom Makassar dengan pengalaman magang langsung sebagai Frontend Developer di Ashari Tech. Saya membangun aplikasi web siap produksi menggunakan React, Next.js, dan TypeScript.",
+    "p2": "Saya telah mengirimkan produk nyata — dari library komponen responsif hingga integrasi full-stack — dan saya sangat peduli terhadap kualitas kode, performa, dan pengalaman pengguna yang benar-benar berfungsi.",
+    "p3": "Ketika tidak coding, saya mempelajari system design, berkontribusi pada open source, atau bereksperimen dengan pola frontend terbaru. Tujuan saya: membangun perangkat lunak yang menciptakan dampak nyata.",
     "skills": [
-      "Frontend Development (React, Next.js)",
-      "Desain & Implementasi UI/UX",
-      "Network Administration & Cyber Security",
-      "Selalu belajar teknologi baru"
+      "Frontend Development (React, Next.js, TypeScript)",
+      "Desain UI/UX & Arsitektur Komponen",
+      "Optimasi Performa & Aksesibilitas",
+      "Selalu shipping, selalu belajar"
     ],
     "location": "Makassar, Indonesia",
     "school": "SMK Telkom Makassar",
     "email": "asyrafulamal06@gmail.com",
-    "quote": "\"Membangun pengalaman digital yang modern, cepat, dan bermanfaat bagi banyak orang.\"",
+    "quote": "\"Antarmuka yang baik tidak terlihat. Yang hebat membuat orang merasakan sesuatu.\"",
     "stats": [
-      { "value": "2+", "label": "Tahun Belajar" },
-      { "value": "10+", "label": "Proyek Dibuat" },
-      { "value": "100%", "label": "Passion Driven" }
+      { "value": "2+", "label": "Tahun Membangun" },
+      { "value": "10+", "label": "Proyek Dikirim" },
+      { "value": "1", "label": "Magang" }
     ]
   },
   "skills": {
@@ -56,14 +57,14 @@
     "headline": "Karya",
     "headline_accent": "Terpilih",
     "live": "Live Demo",
-    "source": "Source"
+    "source": "Kode Sumber"
   },
   "experience": {
     "label": "Perjalanan",
     "headline": "Pengalaman &",
     "headline_accent": "Pertumbuhan",
     "growing": "Perjalanan Profesional",
-    "growing_desc": "Lini masa pelatihan profesional, magang praktis, dan pencapaian akademik saya di bidang rekayasa perangkat lunak.",
+    "growing_desc": "Lini masa magang profesional, pelatihan, kemenangan kompetisi, dan pencapaian akademik saya di bidang rekayasa perangkat lunak.",
     "stats": [
       { "value": "2+", "label": "Tahun Belajar" },
       { "value": "12+", "label": "Proyek Dibuat" },
@@ -119,6 +120,7 @@
     "email_placeholder": "john@example.com",
     "message_placeholder": "Ceritakan tentang proyek kamu...",
     "submit": "Kirim Pesan",
+    "submitting": "Mengirim...",
     "success_title": "Pesan terkirim!",
     "success_body": "Saya akan membalas dalam waktu 24 jam."
   },

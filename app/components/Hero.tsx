@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiDownload } from "react-icons/fi";
 import { useLang } from "../context/LangContext";
 
 export default function Hero() {
@@ -100,7 +100,8 @@ export default function Hero() {
       </div>
 
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ maxWidth: 820, display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+        <div style={{ maxWidth: 860, display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+
           {/* Badges */}
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
             <span
@@ -121,13 +122,13 @@ export default function Hero() {
           {/* Headline */}
           <div>
             <h1 ref={headlineRef} className="text-hero" style={{ lineHeight: 1.05, overflow: "visible" }}>
-              Crafting <span style={{ color: "var(--text-secondary)" }}>Digital</span> Experiences.
+              {t.hero.headline}
             </h1>
           </div>
 
           {/* Sub-role */}
           <div ref={subRef}>
-            <p style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.2rem)", fontWeight: 500, color: "var(--text-muted)", letterSpacing: "0.01em" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 2vw, 1.2rem)", fontWeight: 500, color: "var(--text-muted)", letterSpacing: "0.01em" }}>
               {t.hero.intro}{" "}
               <span style={{ color: "var(--text-primary)", fontWeight: 700 }}>{t.hero.name}</span>{" "}
               {t.hero.subrole}
@@ -135,7 +136,7 @@ export default function Hero() {
           </div>
 
           {/* Tagline */}
-          <p ref={taglineRef} className="text-body-lg" style={{ maxWidth: 560 }}>
+          <p ref={taglineRef} className="text-body-lg" style={{ maxWidth: 580, fontFamily: "var(--font-body)" }}>
             {t.hero.tagline}
           </p>
 
@@ -156,6 +157,39 @@ export default function Hero() {
             >
               {t.hero.cta_contact}
             </button>
+            <a
+              href="/resume.pdf"
+              download
+              className="btn magnetic-element"
+              id="hero-cta-cv"
+              style={{
+                background: "transparent",
+                border: "1px solid var(--border)",
+                color: "var(--text-secondary)",
+                fontSize: "0.88rem",
+                padding: "0.875rem 1.5rem",
+                borderRadius: "100px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                fontWeight: 600,
+                transition: "all 0.3s var(--ease-out)",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--border-hover)";
+                (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+              }}
+            >
+              <FiDownload size={15} />
+              {t.hero.cta_cv}
+            </a>
           </div>
 
           {/* Social row */}

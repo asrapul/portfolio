@@ -10,14 +10,15 @@
   },
   "hero": {
     "available": "Available for work",
-    "role": "Frontend Developer · Student",
-    "headline": "Crafting Digital Experiences.",
+    "role": "Frontend Developer · React / Next.js Specialist",
+    "headline": "I Build Interfaces That Perform.",
     "intro": "Hi, I'm",
     "name": "Andi Asyraful Amal Ilham",
-    "subrole": "— a Frontend Developer & Software Engineering Student",
-    "tagline": "Building modern, fast, and meaningful digital experiences. From elegant UI to smooth interactions — I build products that matter.",
+    "subrole": "— Frontend Developer & Software Engineering Student",
+    "tagline": "I specialize in building fast, accessible, and production-grade web applications using React and Next.js. Clean code, purposeful design, and real-world results.",
     "cta_projects": "View Projects",
     "cta_contact": "Contact Me",
+    "cta_cv": "Download CV",
     "find_me": "Find me on",
     "scroll": "Scroll"
   },
@@ -25,23 +26,23 @@
     "label": "About Me",
     "headline": "Building with purpose,",
     "headline_accent": "not just pixels.",
-    "p1": "I am a Software Engineering student at SMK Telkom Makassar with a strong interest in modern web development, software engineering, and digital technology.",
-    "p2": "I actively learn React.js, Next.js, and various frontend technologies to build fast, responsive applications with great user experiences.",
-    "p3": "Beyond web development, I am also interested in cyber security, network administration, and interface design. My goal is to become a professional software engineer capable of creating digital products that make a real impact.",
+    "p1": "I'm a Software Engineering student at SMK Telkom Makassar with hands-on internship experience as a Frontend Developer at Ashari Tech. I build production-ready web applications using React, Next.js, and TypeScript.",
+    "p2": "I've shipped real products — from responsive component libraries to full-stack integrations — and I care deeply about code quality, performance, and user experience that actually works.",
+    "p3": "When I'm not coding, I'm studying system design, contributing to open source, or experimenting with new frontend patterns. My goal: build software that creates real impact.",
     "skills": [
-      "Frontend Development (React, Next.js)",
-      "UI/UX Design & Implementation",
-      "Network Administration & Cyber Security",
-      "Always learning new technologies"
+      "Frontend Development (React, Next.js, TypeScript)",
+      "UI/UX Design & Component Architecture",
+      "Performance Optimization & Accessibility",
+      "Always shipping, always learning"
     ],
     "location": "Makassar, Indonesia",
     "school": "SMK Telkom Makassar",
     "email": "asyrafulamal06@gmail.com",
-    "quote": "\"Building modern, fast, and meaningful digital experiences for many people.\"",
+    "quote": "\"Good interfaces are invisible. Great ones make people feel something.\"",
     "stats": [
-      { "value": "2+", "label": "Years Learning" },
-      { "value": "10+", "label": "Projects Built" },
-      { "value": "100%", "label": "Passion Driven" }
+      { "value": "2+", "label": "Years Building" },
+      { "value": "10+", "label": "Projects Shipped" },
+      { "value": "1", "label": "Internship" }
     ]
   },
   "skills": {
@@ -54,16 +55,16 @@
   "projects": {
     "label": "Projects",
     "headline": "Selected",
-    "headline_accent": "Works",
+    "headline_accent": "Work",
     "live": "Live Demo",
-    "source": "Source"
+    "source": "Source Code"
   },
   "experience": {
     "label": "Journey",
     "headline": "Experience &",
     "headline_accent": "Growth",
     "growing": "Professional Journey",
-    "growing_desc": "A timeline of my professional training, hands-on internships, and academic achievements in software engineering.",
+    "growing_desc": "A timeline of my professional internship, training, competition wins, and academic achievements in software engineering.",
     "stats": [
       { "value": "2+", "label": "Years Learning" },
       { "value": "12+", "label": "Projects Built" },
@@ -119,6 +120,7 @@
     "email_placeholder": "john@example.com",
     "message_placeholder": "Tell me about your project...",
     "submit": "Send Message",
+    "submitting": "Sending...",
     "success_title": "Message sent!",
     "success_body": "I'll reply within 24 hours."
   },
