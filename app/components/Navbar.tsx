@@ -11,16 +11,23 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // GSAP entrance
-    if (logoRef.current) {
-      gsap.from(logoRef.current, { opacity: 0, x: -20, duration: 0.9, ease: "power3.out", delay: 0.2 });
-    }
-    gsap.from(".nav-link-item", { opacity: 0, y: -12, duration: 0.6, stagger: 0.06, ease: "power3.out", delay: 0.3 });
-    gsap.from(".nav-lang-switcher", { opacity: 0, x: 20, duration: 0.7, ease: "power3.out", delay: 0.5 });
+    // GSAP entrance - wrapped in context to fix React 18 strict mode double-trigger bug
+    const ctx = gsap.context(() => {
+      if (logoRef.current) {
+        gsap.from(logoRef.current, { opacity: 0, x: -20, duration: 0.8, ease: "power3.out", delay: 0.15 });
+      }
+      // Animate the entire desktop-nav container to prevent links disappearing during translation re-renders
+      gsap.from(".desktop-nav", { opacity: 0, y: -10, duration: 0.8, ease: "power3.out", delay: 0.2 });
+      // Animate hamburger button for mobile entry
+      gsap.from(".hamburger-btn", { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.5)", delay: 0.2 });
+    });
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
@@ -43,7 +50,10 @@ export default function Navbar() {
   useEffect(() => {
     if (!menuOpen) return;
     const handler = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+      if (
+        navRef.current && !navRef.current.contains(e.target as Node) &&
+        (!mobileMenuRef.current || !mobileMenuRef.current.contains(e.target as Node))
+      ) {
         setMenuOpen(false);
       }
     };
@@ -60,7 +70,18 @@ export default function Navbar() {
     e.preventDefault();
     setMenuOpen(false);
     const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    if (target) {
+      const offset = 80; // height offset of sticky nav
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = target.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
@@ -78,9 +99,9 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
-          background: scrolled ? "rgba(10, 10, 15, 0.85)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
+          background: scrolled || menuOpen ? "rgba(0, 0, 0, 0.85)" : "transparent",
+          backdropFilter: scrolled || menuOpen ? "blur(20px) saturate(180%)" : "none",
+          borderBottom: scrolled || menuOpen ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
         }}
       >
         {/* Logo — Rolide font */}
@@ -90,6 +111,7 @@ export default function Navbar() {
           onClick={(e) => handleLinkClick(e, "#home")}
           className="nav-logo"
           aria-label="Go to Home"
+          style={{ opacity: 1 }} // Ensure full opacity
         >
           <span className="nav-logo-dot" />
           asrap.
@@ -139,7 +161,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Hamburger — Mobile */}
+        {/* Hamburger — Mobile & Tablet */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
@@ -148,77 +170,152 @@ export default function Navbar() {
           style={{
             display: "none",
             flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "42px",
+            height: "42px",
+            borderRadius: "50%",
+            border: scrolled || menuOpen ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.1)",
+            background: scrolled || menuOpen ? "rgba(255, 255, 255, 0.03)" : "rgba(0,0,0,0.2)",
+            backdropFilter: "blur(8px)",
             gap: "5px",
-            padding: "0.5rem",
-            borderRadius: "8px",
-            background: "transparent",
-            transition: "background 0.2s",
+            padding: 0,
+            cursor: "pointer",
+            transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+            zIndex: 1001,
           }}
         >
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              style={{
-                display: "block",
-                width: 22, height: 1.5,
-                background: "var(--text-primary)",
-                borderRadius: 2,
-                transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
-                transform:
-                  menuOpen
-                    ? i === 0 ? "rotate(45deg) translate(4.5px, 4.5px)"
-                    : i === 2 ? "rotate(-45deg) translate(4.5px, -4.5px)"
-                    : "scaleX(0)"
-                    : "none",
-                opacity: menuOpen && i === 1 ? 0 : 1,
-              }}
-            />
-          ))}
+          <div style={{ display: "flex", flexDirection: "column", gap: "5px", width: "18px" }}>
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "1.5px",
+                  background: "var(--text-primary)",
+                  borderRadius: 2,
+                  transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+                  transform:
+                    menuOpen
+                      ? i === 0 ? "rotate(45deg) translate(4.5px, 4.5px)"
+                      : i === 2 ? "rotate(-45deg) translate(4.5px, -4.5px)"
+                      : "scaleX(0)"
+                      : "none",
+                  transformOrigin: "center",
+                  opacity: menuOpen && i === 1 ? 0 : 1,
+                }}
+              />
+            ))}
+          </div>
         </button>
       </nav>
 
       {/* Mobile Drawer */}
       <div
+        ref={mobileMenuRef}
         style={{
           position: "fixed",
           inset: 0,
           zIndex: 999,
-          background: "rgba(10,10,15,0.97)",
-          backdropFilter: "blur(24px)",
+          background: "rgba(0, 0, 0, 0.94)",
+          backdropFilter: "blur(30px) saturate(200%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: "2rem",
+          gap: "1.5rem",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "all" : "none",
-          transition: "opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
+          transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+          padding: "2rem",
         }}
         className="mobile-menu"
       >
-        {navKeys.map((key, i) => (
-          <a
-            key={key}
-            href={`#${key}`}
-            onClick={(e) => handleLinkClick(e, `#${key}`)}
-            style={{
-              fontFamily: "'Rolide', 'Syne', sans-serif",
-              fontSize: "2rem",
-              fontWeight: 700,
-              color: "var(--text-primary)",
-              letterSpacing: "0.02em",
-              transform: menuOpen ? "translateY(0)" : "translateY(20px)",
-              opacity: menuOpen ? 1 : 0,
-              transition: `all 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.06}s`,
-            }}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
+          {navKeys.map((key, i) => {
+            const isActive = activeSection === key;
+            return (
+              <a
+                key={key}
+                href={`#${key}`}
+                onClick={(e) => handleLinkClick(e, `#${key}`)}
+                className={`mobile-nav-link ${isActive ? "mobile-nav-link-active" : ""}`}
+                style={{
+                  fontFamily: "'Rolide', 'Syne', sans-serif",
+                  fontSize: "1.75rem",
+                  fontWeight: 700,
+                  color: isActive ? "var(--text-primary)" : "rgba(255,255,255,0.6)",
+                  letterSpacing: "0.02em",
+                  transform: menuOpen ? "translateY(0)" : "translateY(30px)",
+                  opacity: menuOpen ? 1 : 0,
+                  transition: `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s`,
+                  textDecoration: "none",
+                }}
+              >
+                {t.nav[key as keyof typeof t.nav]}
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Divider */}
+        <div
+          style={{
+            width: "40px",
+            height: "1px",
+            background: "var(--border)",
+            margin: "1rem 0",
+            transform: menuOpen ? "scaleX(1)" : "scaleX(0)",
+            transition: "transform 0.5s ease 0.3s",
+          }}
+        />
+
+        {/* Mobile Hire Me Button */}
+        <a
+          href="#contact"
+          onClick={(e) => handleLinkClick(e, "#contact")}
+          className="btn btn-primary"
+          style={{
+            padding: "0.75rem 2rem",
+            fontSize: "0.95rem",
+            transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+            opacity: menuOpen ? 1 : 0,
+            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
+          }}
+        >
+          {t.nav.hire}
+        </a>
+
+        {/* Mobile Language Switcher */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.35rem",
+            padding: "0.3rem 0.6rem",
+            border: "1px solid var(--border)",
+            borderRadius: "100px",
+            background: "rgba(255,255,255,0.02)",
+            marginTop: "1.5rem",
+            transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+            opacity: menuOpen ? 1 : 0,
+            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s",
+          }}
+        >
+          <button
+            onClick={() => setLang("en")}
+            className={`lang-btn ${lang === "en" ? "lang-btn-active" : ""}`}
           >
-            {t.nav[key as keyof typeof t.nav]}
-          </a>
-        ))}
-        {/* Mobile lang switcher */}
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
-          <button onClick={() => setLang("en")} className={`lang-btn ${lang === "en" ? "lang-btn-active" : ""}`}>EN</button>
-          <button onClick={() => setLang("id")} className={`lang-btn ${lang === "id" ? "lang-btn-active" : ""}`}>ID</button>
+            EN
+          </button>
+          <span style={{ color: "var(--border-hover)", fontSize: "0.75rem" }}>|</span>
+          <button
+            onClick={() => setLang("id")}
+            className={`lang-btn ${lang === "id" ? "lang-btn-active" : ""}`}
+          >
+            ID
+          </button>
         </div>
       </div>
 
@@ -248,7 +345,7 @@ export default function Navbar() {
           border-radius: 100px;
           font-size: 0.875rem;
           font-weight: 500;
-          color: var(--text-secondary);
+          color: rgba(255, 255, 255, 0.75); /* Bright text for visibility */
           background: transparent;
           transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -287,7 +384,29 @@ export default function Navbar() {
           color: var(--text-primary) !important;
           background: rgba(255,255,255,0.08) !important;
         }
-        @media (max-width: 768px) {
+
+        /* Mobile Drawer Link Hover/Active Effect */
+        .mobile-nav-link {
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        .mobile-nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: var(--text-primary);
+          transition: width 0.3s ease, left 0.3s ease;
+        }
+        .mobile-nav-link:hover::after,
+        .mobile-nav-link-active::after {
+          width: 100%;
+          left: 0;
+        }
+
+        @media (max-width: 991px) { /* Trigger hamburger-btn and mobile view at tablet widths too */
           .desktop-nav { display: none !important; }
           .hamburger-btn { display: flex !important; }
         }
