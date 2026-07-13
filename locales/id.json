@@ -57,7 +57,34 @@
     "headline": "Karya",
     "headline_accent": "Terpilih",
     "live": "Live Demo",
-    "source": "Kode Sumber"
+    "source": "Kode Sumber",
+    "items": [
+      {
+        "id": "burger-loin",
+        "title": "Burger Loin",
+        "description": "Sebuah website modern untuk penjual burger lokal"
+      },
+      {
+        "id": "tk-mitra-bunda",
+        "title": "TK Mitra Bunda",
+        "description": "Aplikasi pendataan absensi dengan QR Code cerdas",
+        "overview": "Mendigitalkan dan mengotomatisasi proses pencatatan kehadiran serta kepulangan siswa TK menggunakan teknologi QR Code, menggantikan sistem absensi manual (kertas). Sangat cocok untuk institusi pendidikan dan dapat dikembangkan untuk perusahaan.",
+        "target": "Guru/Wali Kelas, Admin Sekolah, dan Kepala Sekolah (sebagai pemantau).",
+        "problem_solved": [
+          "Lamanya proses absensi manual.",
+          "Ketidakakuratan data kedatangan dan kepulangan (human error).",
+          "Kesulitan dalam merekap laporan bulanan/harian.",
+          "Tidak terdatanya jam pasti penjemputan anak."
+        ],
+        "features": [
+          { "title": "Autentikasi Aman", "desc": "Login menggunakan Supabase Auth berbasis cookie yang tidak terekspos." },
+          { "title": "Dashboard Interaktif", "desc": "Rekap data kehadiran harian dan bulanan dengan antarmuka modern." },
+          { "title": "Scanner QR Text-to-Speech", "desc": "Memindai QR melalui kamera dengan mode Jam Otomatis dan umpan balik audio pemanggil nama." },
+          { "title": "Manajemen Siswa & Generator QR", "desc": "Kelola data siswa, generate barcode otomatis, dan dapat diunduh (PNG)." },
+          { "title": "Eksport Laporan Excel", "desc": "Ekstrak data kehadiran langsung ke format .xlsx dalam satu klik." }
+        ]
+      }
+    ]
   },
   "experience": {
     "label": "Perjalanan",
@@ -104,7 +131,8 @@
         "description": "Mempelajari konsep dasar rekayasa perangkat lunak, desain algoritma, pengembangan web, dan prinsip jaringan, serta konsisten meraih nilai tertinggi dalam mata pelajaran teknis.",
         "tags": ["Rekayasa Perangkat Lunak", "Web", "Mobile", "Jaringan"]
       }
-    ]
+    ],
+    "view_certificates": "Lihat Semua Sertifikat →"
   },
   "contact": {
     "label": "Kontak",
@@ -122,10 +150,25 @@
     "submit": "Kirim Pesan",
     "submitting": "Mengirim...",
     "success_title": "Pesan terkirim!",
-    "success_body": "Saya akan membalas dalam waktu 24 jam."
+    "success_body": "Saya akan membalas dalam waktu 24 jam.",
+    "err_name_required": "Nama wajib diisi.",
+    "err_email_required": "Email wajib diisi.",
+    "err_email_invalid": "Silakan masukkan alamat email yang valid.",
+    "err_message_required": "Pesan wajib diisi.",
+    "err_message_min": "Pesan minimal harus 10 karakter."
   },
   "footer": {
     "copyright": "Dibuat dengan",
     "available": "Tersedia untuk bekerja"
+  },
+  "certificates": {
+    "back": "← Kembali ke Beranda",
+    "title": "Kredensial Terverifikasi",
+    "accent_title": "& Pencapaian",
+    "subtitle": "Kumpulan sertifikasi akademik, pencapaian, dan penyelesaian kursus profesional saya.",
+    "verify": "Verifikasi Sertifikat",
+    "close": "Tutup Pratinjau",
+    "issued_by": "Diterbitkan oleh",
+    "date": "Tanggal"
   }
 }

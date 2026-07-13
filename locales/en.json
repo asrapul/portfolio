@@ -57,7 +57,34 @@
     "headline": "Selected",
     "headline_accent": "Work",
     "live": "Live Demo",
-    "source": "Source Code"
+    "source": "Source Code",
+    "items": [
+      {
+        "id": "burger-loin",
+        "title": "Burger Loin",
+        "description": "A modern website for a local street burger vendor built with pure HTML5, CSS3, and vanilla JavaScript. Features a brand-aligned visual identity (#BURGERLOKALINDONESIA), an online ordering system with pickup/delivery flow, WhatsApp Business API integration, and a shipping-fee calculator scoped to the Sudiang service area."
+      },
+      {
+        "id": "tk-mitra-bunda",
+        "title": "TK Mitra Bunda",
+        "description": "A smart QR-based attendance application. It digitizes and automates roll calls featuring a real-time dashboard and Text-to-Speech name announcement.",
+        "overview": "Digitizes and automates the attendance and departure recording process for kindergarten students using QR Code technology, replacing the manual (paper) attendance system. Highly suitable for educational institutions and expandable for corporate use.",
+        "target": "Teachers/Homeroom Teachers, School Admins, and Principals (as monitors).",
+        "problem_solved": [
+          "Time-consuming manual attendance process.",
+          "Inaccuracy of arrival and departure data (human error).",
+          "Difficulty in compiling daily/monthly reports.",
+          "Unrecorded exact child pickup times."
+        ],
+        "features": [
+          { "title": "Secure Authentication", "desc": "Login using unexposed cookie-based Supabase Auth." },
+          { "title": "Interactive Dashboard", "desc": "Recapitulate daily and monthly attendance data with a modern interface." },
+          { "title": "Text-to-Speech QR Scanner", "desc": "Scan QR via camera with Automatic Time mode and audio feedback announcing the name." },
+          { "title": "Student Management & QR Generator", "desc": "Manage student data, automatically generate barcodes, and download as PNG." },
+          { "title": "Excel Report Export", "desc": "Extract attendance data directly to .xlsx format in one click." }
+        ]
+      }
+    ]
   },
   "experience": {
     "label": "Journey",
@@ -104,7 +131,8 @@
         "description": "Studying software engineering core concepts, algorithm designs, web development, and networking principles, consistently scoring top grades in technical subjects.",
         "tags": ["Software Engineering", "Web", "Mobile", "Networking"]
       }
-    ]
+    ],
+    "view_certificates": "See Full Certificates →"
   },
   "contact": {
     "label": "Contact",
@@ -122,10 +150,25 @@
     "submit": "Send Message",
     "submitting": "Sending...",
     "success_title": "Message sent!",
-    "success_body": "I'll reply within 24 hours."
+    "success_body": "I'll reply within 24 hours.",
+    "err_name_required": "Name is required.",
+    "err_email_required": "Email is required.",
+    "err_email_invalid": "Please enter a valid email address.",
+    "err_message_required": "Message is required.",
+    "err_message_min": "Message must be at least 10 characters."
   },
   "footer": {
     "copyright": "Built with",
     "available": "Available for work"
+  },
+  "certificates": {
+    "back": "← Back to Home",
+    "title": "Verified Credentials",
+    "accent_title": "& Achievements",
+    "subtitle": "A collection of my academic certifications, achievements, and professional course completions.",
+    "verify": "Verify Certificate",
+    "close": "Close Preview",
+    "issued_by": "Issued by",
+    "date": "Date"
   }
 }
