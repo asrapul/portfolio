@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
 import { useLang } from "../context/LangContext";
+import Link from "next/link";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -142,14 +143,14 @@ export default function Hero() {
 
           {/* CTAs */}
           <div ref={ctaRef} style={{ display: "flex", gap: "1rem", flexWrap: "wrap", paddingTop: "0.5rem" }}>
-            <button
-              onClick={() => handleScroll("projects")}
+            <Link
+              href="/"
               className="btn btn-primary magnetic-element"
               id="hero-cta-projects"
             >
               {t.hero.cta_projects}
               <FiArrowRight size={16} />
-            </button>
+            </Link>
             <button
               onClick={() => handleScroll("contact")}
               className="btn btn-outline magnetic-element"

@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useLang } from "../context/LangContext";
+import Link from "next/link";
 
-const navKeys = ["home", "about", "skills", "projects", "experience", "contact"] as const;
+const navKeys = ["home", "about", "skills", "experience", "contact"] as const;
 
-export default function Navbar() {
+export default function Navbar({ variant = "portfolio" }: { variant?: "landing" | "portfolio" }) {
   const { lang, setLang, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -15,6 +16,8 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  const isLanding = variant === "landing";
 
   useEffect(() => {
     // GSAP entrance - wrapped in context to fix React 18 strict mode double-trigger bug
@@ -25,12 +28,16 @@ export default function Navbar() {
       // Animate the entire desktop-nav container to prevent links disappearing during translation re-renders
       gsap.from(".desktop-nav", { opacity: 0, y: -10, duration: 0.8, ease: "power3.out", delay: 0.2 });
       // Animate hamburger button for mobile entry
-      gsap.from(".hamburger-btn", { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.5)", delay: 0.2 });
+      if (!isLanding) {
+        gsap.from(".hamburger-btn", { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.5)", delay: 0.2 });
+      }
     });
     return () => ctx.revert();
-  }, []);
+  }, [isLanding]);
 
   useEffect(() => {
+    if (isLanding) return; // No scroll spy needed for landing page Navbar
+    
     const navLinks = navKeys.map(k => ({ href: `#${k}` }));
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -45,7 +52,15 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isLanding]);
+
+  useEffect(() => {
+    if (isLanding) {
+      const onScrollLanding = () => setScrolled(window.scrollY > 40);
+      window.addEventListener("scroll", onScrollLanding, { passive: true });
+      return () => window.removeEventListener("scroll", onScrollLanding);
+    }
+  }, [isLanding]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -69,6 +84,9 @@ export default function Navbar() {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
+    
+    if (isLanding) return; // shouldn't happen, but just in case
+    
     const target = document.querySelector(href);
     if (target) {
       const offset = 80; // height offset of sticky nav
@@ -105,21 +123,33 @@ export default function Navbar() {
         }}
       >
         {/* Logo — Rolide font */}
-        <a
-          ref={logoRef}
-          href="#home"
-          onClick={(e) => handleLinkClick(e, "#home")}
-          className="nav-logo"
-          aria-label="Go to Home"
-          style={{ opacity: 1 }} // Ensure full opacity
-        >
-          <span className="nav-logo-dot" />
-          asrap.
-        </a>
+        {isLanding ? (
+          <Link
+            href="/"
+            className="nav-logo"
+            aria-label="Go to Home"
+            style={{ opacity: 1 }} // Ensure full opacity
+          >
+            <span className="nav-logo-dot" />
+            asrap.
+          </Link>
+        ) : (
+          <a
+            ref={logoRef}
+            href="#home"
+            onClick={(e) => handleLinkClick(e, "#home")}
+            className="nav-logo"
+            aria-label="Go to Home"
+            style={{ opacity: 1 }} // Ensure full opacity
+          >
+            <span className="nav-logo-dot" />
+            asrap.
+          </a>
+        )}
 
         {/* Desktop Nav */}
-        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-          {navKeys.map((key) => {
+        <div className={`desktop-nav ${isLanding ? 'landing-nav' : ''}`} style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+          {!isLanding && navKeys.map((key) => {
             const isActive = activeSection === key;
             return (
               <a
@@ -132,14 +162,34 @@ export default function Navbar() {
               </a>
             );
           })}
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "#contact")}
-            className="btn btn-primary"
-            style={{ marginLeft: "0.5rem", padding: "0.5rem 1.4rem", fontSize: "0.875rem" }}
-          >
-            {t.nav.hire}
-          </a>
+          {/* Projects link that goes to landing / page */}
+          {!isLanding && (
+            <Link
+              href="/"
+              className="nav-link-item"
+            >
+              {t.nav.projects}
+            </Link>
+          )}
+
+          {isLanding ? (
+            <Link
+              href="/portfolio"
+              className="btn btn-primary btn-landing-desktop"
+              style={{ padding: "0.5rem 1.4rem", fontSize: "0.875rem" }}
+            >
+              Continue to Portfolio
+            </Link>
+          ) : (
+            <a
+              href="#contact"
+              onClick={(e) => handleLinkClick(e, "#contact")}
+              className="btn btn-primary"
+              style={{ marginLeft: "0.5rem", padding: "0.5rem 1.4rem", fontSize: "0.875rem" }}
+            >
+              {t.nav.hire}
+            </a>
+          )}
 
           {/* Language Switcher */}
           <div className="nav-lang-switcher">
@@ -161,163 +211,199 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Hamburger — Mobile & Tablet */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          className="hamburger-btn"
+        {/* Mobile Landing CTA (shows only on mobile when isLanding is true) */}
+        {isLanding && (
+          <div className="mobile-landing-cta" style={{ display: "none" }}>
+            <Link
+              href="/portfolio"
+              className="btn btn-primary"
+              style={{ padding: "0.4rem 1rem", fontSize: "0.8rem" }}
+            >
+              Portfolio
+            </Link>
+          </div>
+        )}
+
+        {/* Hamburger — Mobile & Tablet (Only for portfolio) */}
+        {!isLanding && (
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="hamburger-btn"
+            style={{
+              display: "none",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              border: scrolled || menuOpen ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.1)",
+              background: scrolled || menuOpen ? "rgba(255, 255, 255, 0.03)" : "rgba(0,0,0,0.2)",
+              backdropFilter: "blur(8px)",
+              gap: "5px",
+              padding: 0,
+              cursor: "pointer",
+              transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+              zIndex: 1001,
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: "5px", width: "18px" }}>
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "1.5px",
+                    background: "var(--text-primary)",
+                    borderRadius: 2,
+                    transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+                    transform:
+                      menuOpen
+                        ? i === 0 ? "rotate(45deg) translate(4.5px, 4.5px)"
+                        : i === 2 ? "rotate(-45deg) translate(4.5px, -4.5px)"
+                        : "scaleX(0)"
+                        : "none",
+                    transformOrigin: "center",
+                    opacity: menuOpen && i === 1 ? 0 : 1,
+                  }}
+                />
+              ))}
+            </div>
+          </button>
+        )}
+      </nav>
+
+      {/* Mobile Drawer (Only for portfolio) */}
+      {!isLanding && (
+        <div
+          ref={mobileMenuRef}
           style={{
-            display: "none",
+            position: "fixed",
+            inset: 0,
+            zIndex: 999,
+            background: "rgba(0, 0, 0, 0.94)",
+            backdropFilter: "blur(30px) saturate(200%)",
+            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            width: "42px",
-            height: "42px",
-            borderRadius: "50%",
-            border: scrolled || menuOpen ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.1)",
-            background: scrolled || menuOpen ? "rgba(255, 255, 255, 0.03)" : "rgba(0,0,0,0.2)",
-            backdropFilter: "blur(8px)",
-            gap: "5px",
-            padding: 0,
-            cursor: "pointer",
-            transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
-            zIndex: 1001,
+            gap: "1.5rem",
+            opacity: menuOpen ? 1 : 0,
+            pointerEvents: menuOpen ? "all" : "none",
+            transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+            padding: "2rem",
           }}
+          className="mobile-menu"
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px", width: "18px" }}>
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                style={{
-                  display: "block",
-                  width: "100%",
-                  height: "1.5px",
-                  background: "var(--text-primary)",
-                  borderRadius: 2,
-                  transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
-                  transform:
-                    menuOpen
-                      ? i === 0 ? "rotate(45deg) translate(4.5px, 4.5px)"
-                      : i === 2 ? "rotate(-45deg) translate(4.5px, -4.5px)"
-                      : "scaleX(0)"
-                      : "none",
-                  transformOrigin: "center",
-                  opacity: menuOpen && i === 1 ? 0 : 1,
-                }}
-              />
-            ))}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
+            {navKeys.map((key, i) => {
+              const isActive = activeSection === key;
+              return (
+                <a
+                  key={key}
+                  href={`#${key}`}
+                  onClick={(e) => handleLinkClick(e, `#${key}`)}
+                  className={`mobile-nav-link ${isActive ? "mobile-nav-link-active" : ""}`}
+                  style={{
+                    fontFamily: "'Rolide', 'Syne', sans-serif",
+                    fontSize: "1.75rem",
+                    fontWeight: 700,
+                    color: isActive ? "var(--text-primary)" : "rgba(255,255,255,0.6)",
+                    letterSpacing: "0.02em",
+                    transform: menuOpen ? "translateY(0)" : "translateY(30px)",
+                    opacity: menuOpen ? 1 : 0,
+                    transition: `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s`,
+                    textDecoration: "none",
+                  }}
+                >
+                  {t.nav[key as keyof typeof t.nav]}
+                </a>
+              );
+            })}
+            {/* Projects → landing page */}
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Rolide', 'Syne', sans-serif",
+                fontSize: "1.75rem",
+                fontWeight: 700,
+                color: "rgba(255,255,255,0.6)",
+                letterSpacing: "0.02em",
+                transform: menuOpen ? "translateY(0)" : "translateY(30px)",
+                opacity: menuOpen ? 1 : 0,
+                transition: `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${navKeys.length * 0.05}s`,
+                textDecoration: "none",
+              }}
+            >
+              {t.nav.projects}
+            </Link>
           </div>
-        </button>
-      </nav>
 
-      {/* Mobile Drawer */}
-      <div
-        ref={mobileMenuRef}
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 999,
-          background: "rgba(0, 0, 0, 0.94)",
-          backdropFilter: "blur(30px) saturate(200%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1.5rem",
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "all" : "none",
-          transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
-          padding: "2rem",
-        }}
-        className="mobile-menu"
-      >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
-          {navKeys.map((key, i) => {
-            const isActive = activeSection === key;
-            return (
-              <a
-                key={key}
-                href={`#${key}`}
-                onClick={(e) => handleLinkClick(e, `#${key}`)}
-                className={`mobile-nav-link ${isActive ? "mobile-nav-link-active" : ""}`}
-                style={{
-                  fontFamily: "'Rolide', 'Syne', sans-serif",
-                  fontSize: "1.75rem",
-                  fontWeight: 700,
-                  color: isActive ? "var(--text-primary)" : "rgba(255,255,255,0.6)",
-                  letterSpacing: "0.02em",
-                  transform: menuOpen ? "translateY(0)" : "translateY(30px)",
-                  opacity: menuOpen ? 1 : 0,
-                  transition: `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s`,
-                  textDecoration: "none",
-                }}
-              >
-                {t.nav[key as keyof typeof t.nav]}
-              </a>
-            );
-          })}
-        </div>
+          {/* Divider */}
+          <div
+            style={{
+              width: "40px",
+              height: "1px",
+              background: "var(--border)",
+              margin: "1rem 0",
+              transform: menuOpen ? "scaleX(1)" : "scaleX(0)",
+              transition: "transform 0.5s ease 0.3s",
+            }}
+          />
 
-        {/* Divider */}
-        <div
-          style={{
-            width: "40px",
-            height: "1px",
-            background: "var(--border)",
-            margin: "1rem 0",
-            transform: menuOpen ? "scaleX(1)" : "scaleX(0)",
-            transition: "transform 0.5s ease 0.3s",
-          }}
-        />
-
-        {/* Mobile Hire Me Button */}
-        <a
-          href="#contact"
-          onClick={(e) => handleLinkClick(e, "#contact")}
-          className="btn btn-primary"
-          style={{
-            padding: "0.75rem 2rem",
-            fontSize: "0.95rem",
-            transform: menuOpen ? "translateY(0)" : "translateY(20px)",
-            opacity: menuOpen ? 1 : 0,
-            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
-          }}
-        >
-          {t.nav.hire}
-        </a>
-
-        {/* Mobile Language Switcher */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.35rem",
-            padding: "0.3rem 0.6rem",
-            border: "1px solid var(--border)",
-            borderRadius: "100px",
-            background: "rgba(255,255,255,0.02)",
-            marginTop: "1.5rem",
-            transform: menuOpen ? "translateY(0)" : "translateY(20px)",
-            opacity: menuOpen ? 1 : 0,
-            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s",
-          }}
-        >
-          <button
-            onClick={() => setLang("en")}
-            className={`lang-btn ${lang === "en" ? "lang-btn-active" : ""}`}
+          {/* Mobile Hire Me Button */}
+          <a
+            href="#contact"
+            onClick={(e) => handleLinkClick(e, "#contact")}
+            className="btn btn-primary"
+            style={{
+              padding: "0.75rem 2rem",
+              fontSize: "0.95rem",
+              transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+              opacity: menuOpen ? 1 : 0,
+              transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
+            }}
           >
-            EN
-          </button>
-          <span style={{ color: "var(--border-hover)", fontSize: "0.75rem" }}>|</span>
-          <button
-            onClick={() => setLang("id")}
-            className={`lang-btn ${lang === "id" ? "lang-btn-active" : ""}`}
+            {t.nav.hire}
+          </a>
+
+          {/* Mobile Language Switcher */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.35rem",
+              padding: "0.3rem 0.6rem",
+              border: "1px solid var(--border)",
+              borderRadius: "100px",
+              background: "rgba(255,255,255,0.02)",
+              marginTop: "1.5rem",
+              transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+              opacity: menuOpen ? 1 : 0,
+              transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s",
+            }}
           >
-            ID
-          </button>
+            <button
+              onClick={() => setLang("en")}
+              className={`lang-btn ${lang === "en" ? "lang-btn-active" : ""}`}
+            >
+              EN
+            </button>
+            <span style={{ color: "var(--border-hover)", fontSize: "0.75rem" }}>|</span>
+            <button
+              onClick={() => setLang("id")}
+              className={`lang-btn ${lang === "id" ? "lang-btn-active" : ""}`}
+            >
+              ID
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       <style>{`
         .nav-logo {
@@ -407,8 +493,10 @@ export default function Navbar() {
         }
 
         @media (max-width: 991px) { /* Trigger hamburger-btn and mobile view at tablet widths too */
-          .desktop-nav { display: none !important; }
+          .desktop-nav:not(.landing-nav) { display: none !important; }
           .hamburger-btn { display: flex !important; }
+          .desktop-nav.landing-nav .btn-landing-desktop { display: none; }
+          .mobile-landing-cta { display: flex !important; }
         }
       `}</style>
     </>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowUpRight, FiAward, FiBookOpen, FiBriefcase, FiZap } from "react-icons/fi";
@@ -341,33 +342,7 @@ export default function Experience() {
                         (e.currentTarget as HTMLElement).style.boxShadow = isAchievement ? "0 8px 32px -4px rgba(255, 255, 255, 0.03)" : "none";
                       }}
                     >
-                      {/* Highlight Trophy & Winner Badge */}
-                      {isAchievement && (
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "1.5rem",
-                            right: "1.5rem",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "0.4rem",
-                            background: "rgba(255, 255, 255, 0.08)",
-                            border: "1px solid rgba(255, 255, 255, 0.2)",
-                            borderRadius: "100px",
-                            padding: "0.25rem 0.75rem",
-                            color: "#ffffff",
-                            fontSize: "0.72rem",
-                            fontWeight: 700,
-                            textTransform: "uppercase",
-                            letterSpacing: "0.06em",
-                          }}
-                        >
-                          <FiAward size={13} />
-                          Winner
-                        </div>
-                      )}
-
-                      {/* Header containing Logo & Organization Detail */}
+                          {/* Header containing Logo & Organization Detail */}
                       <div style={{ display: "flex", alignItems: "center", gap: "1.1rem", marginBottom: "1.25rem" }}>
                         <div
                           className="timeline-logo"
@@ -454,6 +429,27 @@ export default function Experience() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* View Certificates Link Button */}
+            <div
+              className="view-certs-btn-wrapper"
+              style={{
+                marginTop: "3rem",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Link
+                href="/certificates"
+                className="btn btn-outline"
+                style={{
+                  fontFamily: "'Rolide', 'Syne', sans-serif",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {t.experience.view_certificates}
+              </Link>
             </div>
           </div>
         </div>

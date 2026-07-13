@@ -25,16 +25,16 @@ const EMAILJS_PUBLIC_KEY = "BbEDVmskV7dS0OD3V";     // ← replace
 type FormState = { name: string; email: string; message: string };
 type FormErrors = Partial<FormState>;
 
-function validate(values: FormState): FormErrors {
+function validate(values: FormState, t: any): FormErrors {
   const errors: FormErrors = {};
-  if (!values.name.trim()) errors.name = "Name is required.";
+  if (!values.name.trim()) errors.name = t.contact.err_name_required;
   if (!values.email.trim()) {
-    errors.email = "Email is required.";
+    errors.email = t.contact.err_email_required;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = "Please enter a valid email address.";
+    errors.email = t.contact.err_email_invalid;
   }
-  if (!values.message.trim()) errors.message = "Message is required.";
-  else if (values.message.trim().length < 10) errors.message = "Message must be at least 10 characters.";
+  if (!values.message.trim()) errors.message = t.contact.err_message_required;
+  else if (values.message.trim().length < 10) errors.message = t.contact.err_message_min;
   return errors;
 }
 
@@ -72,7 +72,7 @@ export default function Contact() {
 
   const handleBlur = (field: keyof FormState) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
-    const fieldErrors = validate(formState);
+    const fieldErrors = validate(formState, t);
     setErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
   };
 
@@ -80,7 +80,7 @@ export default function Contact() {
     const updated = { ...formState, [field]: value };
     setFormState(updated);
     if (touched[field]) {
-      const fieldErrors = validate(updated);
+      const fieldErrors = validate(updated, t);
       setErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
     }
   };
@@ -88,7 +88,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTouched({ name: true, email: true, message: true });
-    const validationErrors = validate(formState);
+    const validationErrors = validate(formState, t);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 

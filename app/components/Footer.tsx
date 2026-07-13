@@ -2,6 +2,7 @@
 
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 import { useLang } from "../context/LangContext";
+import Link from "next/link";
 
 const socials = [
   { href: "https://github.com/asrapul", label: "GitHub", icon: <FiGithub size={15} /> },
@@ -9,7 +10,7 @@ const socials = [
   { href: "https://www.instagram.com/asrapulamal/", label: "Instagram", icon: <FiInstagram size={15} /> },
 ];
 
-const navKeys = ["home", "about", "skills", "projects", "experience", "contact"] as const;
+const navKeys = ["home", "about", "skills", "experience", "contact"] as const;
 
 export default function Footer() {
   const { t } = useLang();
@@ -65,6 +66,10 @@ export default function Footer() {
                 {t.nav[key as keyof typeof t.nav]}
               </a>
             ))}
+            {/* Projects → landing page */}
+            <Link href="/" className="footer-nav-link">
+              {t.nav.projects}
+            </Link>
           </nav>
 
           {/* Social icons */}
