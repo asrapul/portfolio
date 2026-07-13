@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useLang } from "../context/LangContext";
 import Link from "next/link";
+import Image from "next/image";
 
 const navKeys = ["home", "about", "skills", "experience", "contact"] as const;
 
@@ -130,7 +131,7 @@ export default function Navbar({ variant = "portfolio" }: { variant?: "landing" 
             aria-label="Go to Home"
             style={{ opacity: 1 }} // Ensure full opacity
           >
-            <span className="nav-logo-dot" />
+            <Image src="/Icon_web.png" alt="Logo" width={28} height={28} style={{ borderRadius: "50%" }} />
             asrap.
           </Link>
         ) : (
@@ -142,7 +143,7 @@ export default function Navbar({ variant = "portfolio" }: { variant?: "landing" 
             aria-label="Go to Home"
             style={{ opacity: 1 }} // Ensure full opacity
           >
-            <span className="nav-logo-dot" />
+            <Image src="/Icon_web.png" alt="Logo" width={28} height={28} style={{ borderRadius: "50%" }} />
             asrap.
           </a>
         )}

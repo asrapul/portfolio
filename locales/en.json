@@ -62,12 +62,12 @@
       {
         "id": "burger-loin",
         "title": "Burger Loin",
-        "description": "A modern website for a local street burger vendor built with pure HTML5, CSS3, and vanilla JavaScript. Features a brand-aligned visual identity (#BURGERLOKALINDONESIA), an online ordering system with pickup/delivery flow, WhatsApp Business API integration, and a shipping-fee calculator scoped to the Sudiang service area."
+        "description": "A modern website for a local street burger vendor"
       },
       {
         "id": "tk-mitra-bunda",
         "title": "TK Mitra Bunda",
-        "description": "A smart QR-based attendance application. It digitizes and automates roll calls featuring a real-time dashboard and Text-to-Speech name announcement.",
+        "description": "A smart QR-based attendance application",
         "overview": "Digitizes and automates the attendance and departure recording process for kindergarten students using QR Code technology, replacing the manual (paper) attendance system. Highly suitable for educational institutions and expandable for corporate use.",
         "target": "Teachers/Homeroom Teachers, School Admins, and Principals (as monitors).",
         "problem_solved": [

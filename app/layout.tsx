@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Andi Asyraful Amal Ilham", url: "https://github.com/asrapul" }],
   creator: "Andi Asyraful Amal Ilham",
+  icons: {
+    icon: "/Icon_web.png",
+  },
   robots: {
     index: true,
     follow: true,

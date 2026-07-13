@@ -20,7 +20,9 @@ const projectsData = [
     source: "https://github.com/asrapul/Burger-Loin",
     gradient: "linear-gradient(135deg, rgba(194,48,40,0.2) 0%, rgba(255,193,7,0.08) 100%)",
     date: "June 2025",
-    image: "/burgerloin_mockup.png",
+    image: "/burger-loin/burgerloin_mockup.png",
+    imgWidth: 1000,
+    imgHeight: 1000,
   },
 ];
 
@@ -204,25 +206,10 @@ function FeaturedProjectCard({ project, title, description, t }: { project: type
           className="featured-card-visual"
           style={{
             flex: "0 0 48%",
-            background: project.gradient,
             position: "relative",
             overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          {/* Grid lines */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-            }}
-          />
-
           {/* Featured badge */}
           <div
             style={{
@@ -244,29 +231,17 @@ function FeaturedProjectCard({ project, title, description, t }: { project: type
             ★ Featured Project
           </div>
 
-          {/* Browser mockup */}
-          <div className="browser-mockup-container">
-            <div className="browser-shell">
-              <div className="browser-header">
-                <div className="browser-dots">
-                  <span className="browser-dot dot-red" />
-                  <span className="browser-dot dot-yellow" />
-                  <span className="browser-dot dot-green" />
-                </div>
-                <div className="browser-address">burger-loin-ebon.vercel.app</div>
-              </div>
-              <div className="browser-screen">
-                <Image
-                  src={project.image}
-                  alt={title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 48vw"
-                  className="browser-image"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
+          {/* Project Image */}
+          <Image
+            src={project.image}
+            alt={title}
+            width={project.imgWidth || 1920}
+            height={project.imgHeight || 1080}
+            sizes="(max-width: 768px) 100vw, 48vw"
+            className="transition-transform duration-500 hover:scale-105"
+            style={{ width: "100%", height: "auto", display: "block" }}
+            priority
+          />
         </div>
 
         {/* Content */}

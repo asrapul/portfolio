@@ -49,6 +49,7 @@ export default function LandingPage() {
       hire: "Hire me",
       portfolio: "Continue to Portfolio",
       viewProject: "View Project",
+      note: "*Tap the project you want to view",
     },
     id: {
       headline: "Proyek",
@@ -56,6 +57,7 @@ export default function LandingPage() {
       hire: "Hire me",
       portfolio: "Lanjut ke Portofolio",
       viewProject: "Lihat Proyek",
+      note: "*Ketuk project yang ingin Anda lihat",
     },
   };
   const c = copy[lang as keyof typeof copy] || copy.en;
@@ -127,28 +129,32 @@ export default function LandingPage() {
             </p>
 
             {/* CTAs */}
-            <div
-              className="landing-ctas"
-              style={{ display: "flex", gap: "0.85rem", marginTop: "2rem", flexWrap: "wrap", alignItems: "center" }}
-            >
-              <Link
-                href="/portfolio#contact"
-                className="btn btn-primary"
-                style={{ padding: "0.7rem 1.8rem", fontSize: "0.9rem" }}
-              >
-                {c.hire}
-              </Link>
-              <Link
-                href="/portfolio"
-                className="btn btn-outline"
-                style={{ padding: "0.7rem 1.8rem", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-              >
-                {c.portfolio}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </Link>
+            <div className="landing-ctas" style={{ display: "flex", flexDirection: "column", gap: "0.85rem", marginTop: "2rem" }}>
+              <div style={{ display: "flex", gap: "0.85rem", flexWrap: "wrap", alignItems: "center" }}>
+                <Link
+                  href="/portfolio#contact"
+                  className="btn btn-primary"
+                  style={{ padding: "0.7rem 1.8rem", fontSize: "0.9rem" }}
+                >
+                  {c.hire}
+                </Link>
+                <Link
+                  href="/portfolio"
+                  className="btn btn-outline"
+                  style={{ padding: "0.7rem 1.8rem", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+                >
+                  {c.portfolio}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </Link>
+              </div>
+              
+              {/* Small Note */}
+              <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: 0, fontStyle: "italic", paddingLeft: "0.2rem" }}>
+                {c.note}
+              </p>
             </div>
           </div>
 
@@ -168,7 +174,6 @@ export default function LandingPage() {
                   project={project}
                   title={title}
                   description={description}
-                  viewLabel={c.viewProject}
                 />
               );
             })}
@@ -187,96 +192,49 @@ function ProjectGridCard({
   project,
   title,
   description,
-  viewLabel,
 }: {
   project: typeof projectsData[0];
   title: string;
   description: string;
-  viewLabel: string;
 }) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-
-  const handleEnter = () => {
-    if (!cardRef.current) return;
-    gsap.to(cardRef.current, {
-      background: "rgba(255,255,255,0.04)",
-      duration: 0.25,
-      ease: "power2.out",
-    });
-  };
-  const handleLeave = () => {
-    if (!cardRef.current) return;
-    gsap.to(cardRef.current, {
-      background: "var(--bg-card)",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  };
-
-  // Trim description to max 9 words
-  const words = description.split(" ");
-  const shortDesc = words.length > 9 ? words.slice(0, 9).join(" ") + "…" : description;
-
   return (
     <Link
-      ref={cardRef}
       href={`/projects/${project.id}`}
-      className="project-grid-item bg-neutral-900 rounded-2xl py-6 pr-6 pl-10 flex items-center gap-6 hover:bg-neutral-800/80 transition-colors"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      style={{ textDecoration: "none", minHeight: "110px", maxHeight: "130px", height: "120px" }}
+      className="project-grid-item relative flex items-center gap-5 p-5 group"
     >
-      {/* Icon / Thumbnail */}
-      <div
-        className="relative w-14 h-14 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-black"
-      >
+      {/* Icon / Thumbnail - Menggunakan class project-grid-icon untuk bentuk squircle */}
+      <div className="project-grid-icon relative flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden">
         <Image
           src={project.icon}
           alt={title}
           fill
-          sizes="64px"
-          className="object-contain p-2"
+          sizes="60px"
+          className="object-contain p-2" 
         />
       </div>
 
-      {/* Text */}
-      <div className="flex-1 min-w-0">
-        <div 
-          className="text-base text-white mb-2 truncate tracking-wide"
-          style={{ fontFamily: "'Rolide', 'Syne', sans-serif" }}
-        >
+      {/* Text Container */}
+      <div className="flex-1 min-w-0 pr-4">
+        {/* Menggunakan font-display dari global.css Anda */}
+        <h3 className="font-display text-lg font-bold tracking-normal text-white mb-1 truncate">
           {title}
-        </div>
-        <p className="text-sm text-neutral-400 leading-relaxed m-0 line-clamp-2" style={{ lineHeight: "1.6" }}>
-          {shortDesc}
+        </h3>
+        {/* Menggunakan text-body dari global.css Anda */}
+        <p className="text-body text-sm m-0 line-clamp-2">
+          {description}
         </p>
       </div>
 
-      {/* Hover arrow */}
-      <div
-        className="grid-card-arrow"
-        style={{
-          position: "absolute",
-          top: "1.1rem",
-          right: "1.1rem",
-          color: "var(--text-muted)",
-          opacity: 0,
-          transition: "opacity 0.2s, transform 0.2s",
-          transform: "translate(-4px, 4px)",
-        }}
+      {/* Hover arrow - Menyesuaikan warna dengan var(--text-muted) */}
+      <div 
+        className="absolute right-5 top-5 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 translate-x-2 -translate-y-2"
+        style={{ color: "var(--text-muted)" }}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="7" y1="17" x2="17" y2="7" />
           <polyline points="7 7 17 7 17 17" />
         </svg>
       </div>
-
-      <style>{`
-        .project-grid-item:hover .grid-card-arrow {
-          opacity: 1 !important;
-          transform: translate(0, 0) !important;
-        }
-      `}</style>
     </Link>
   );
 }

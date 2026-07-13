@@ -3,6 +3,7 @@
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 import { useLang } from "../context/LangContext";
 import Link from "next/link";
+import Image from "next/image";
 
 const socials = [
   { href: "https://github.com/asrapul", label: "GitHub", icon: <FiGithub size={15} /> },
@@ -50,7 +51,7 @@ export default function Footer() {
             className="footer-logo"
             aria-label="Go to top"
           >
-            <span className="footer-logo-dot" />
+            <Image src="/Icon_web.png" alt="Logo" width={28} height={28} style={{ borderRadius: "50%" }} />
             asrap.
           </a>
 

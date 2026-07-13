@@ -9,6 +9,7 @@ import { FiExternalLink, FiGithub, FiArrowLeft } from "react-icons/fi";
 import { useLang } from "../../context/LangContext";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import TkMitraBundaContent from "./TkMitraBundaContent";
 
 // ── Centralized project metadata (non-translated) ───────────────────────
 const projectsMeta: Record<string, {
@@ -20,6 +21,8 @@ const projectsMeta: Record<string, {
   gradient: string;
   date: string;
   image: string;
+  imgWidth: number;
+  imgHeight: number;
   browserUrl: string;
 }> = {
   "burger-loin": {
@@ -30,18 +33,22 @@ const projectsMeta: Record<string, {
     source: "https://github.com/asrapul/Burger-Loin",
     gradient: "linear-gradient(135deg, rgba(194,48,40,0.2) 0%, rgba(255,193,7,0.08) 100%)",
     date: "June 2025",
-    image: "/burgerloin_mockup.png",
+    image: "/burger-loin/burgerloin_mockup.png",
+    imgWidth: 1000,
+    imgHeight: 1000,
     browserUrl: "burger-loin-ebon.vercel.app",
   },
   "tk-mitra-bunda": {
     id: "tk-mitra-bunda",
-    stack: ["Next.js 16", "Tailwind CSS v4", "Supabase", "html5-qrcode", "React Hooks"],
+    stack: ["React 19", "Next.js App Router", "Tailwind CSS 4", "Supabase", "html5-qrcode"],
     color: "#27c93f",
     demo: "https://absensi-demo.vercel.app/",
     source: "No Code Source",
     gradient: "linear-gradient(135deg, rgba(39,201,63,0.2) 0%, rgba(0,0,0,0) 100%)",
     date: "August 2026",
     image: "/Dashboard-Absensi.png",
+    imgWidth: 1920,
+    imgHeight: 1080,
     browserUrl: "absensi-demo.vercel.app",
   },
 };
@@ -170,135 +177,122 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             )}
           </div>
 
-          {/* Browser Mockup */}
+          {/* Project Image */}
           <div
             className="detail-mockup"
             style={{
-              background: meta.gradient,
-              border: "1px solid var(--border)",
               borderRadius: "var(--radius-xl)",
               overflow: "hidden",
               marginBottom: "3rem",
               position: "relative",
+              width: "100%",
+              border: "1px solid var(--border)",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
             }}
           >
-            {/* Grid overlay */}
-            <div style={{
-              position: "absolute", inset: 0, pointerEvents: "none",
-              backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-            }} />
-            <div style={{ padding: "1.5rem" }}>
-              <div className="browser-shell" style={{ height: "420px" }}>
-                <div className="browser-header">
-                  <div className="browser-dots">
-                    <span className="browser-dot dot-red" />
-                    <span className="browser-dot dot-yellow" />
-                    <span className="browser-dot dot-green" />
-                  </div>
-                  <div className="browser-address">{meta.browserUrl}</div>
-                </div>
-                <div className="browser-screen">
-                  <Image
-                    src={meta.image}
-                    alt={title}
-                    fill
-                    sizes="(max-width: 820px) 100vw, 820px"
-                    className="browser-image"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
+            <Image
+              src={meta.image}
+              alt={title}
+              width={meta.imgWidth}
+              height={meta.imgHeight}
+              sizes="(max-width: 820px) 100vw, 820px"
+              className="transition-transform duration-500 hover:scale-105"
+              style={{ width: "100%", height: "auto", display: "block" }}
+              priority
+            />
           </div>
 
           {/* Body content */}
           <div className="detail-body" style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+            {unwrappedParams.id === "tk-mitra-bunda" ? (
+              <TkMitraBundaContent />
+            ) : (
+              <>
+                {/* Overview */}
+                <div>
+                  <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
+                    {c.overview}
+                  </h2>
+                  {translated?.overview ? (
+                    <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                      {translated.overview}
+                    </p>
+                  ) : (
+                    <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                      {description}
+                    </p>
+                  )}
+                </div>
 
-            {/* Overview */}
-            <div>
-              <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
-                {c.overview}
-              </h2>
-              {translated?.overview ? (
-                <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-                  {translated.overview}
-                </p>
-              ) : (
-                <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-                  {description}
-                </p>
-              )}
-            </div>
+                {/* Target Audience (If available) */}
+                {translated?.target && (
+                  <div>
+                    <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
+                      {c.target}
+                    </h2>
+                    <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                      {translated.target}
+                    </p>
+                  </div>
+                )}
 
-            {/* Target Audience (If available) */}
-            {translated?.target && (
-              <div>
-                <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
-                  {c.target}
-                </h2>
-                <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-                  {translated.target}
-                </p>
-              </div>
+                {/* Problems Solved (If available) */}
+                {translated?.problem_solved && Array.isArray(translated.problem_solved) && (
+                  <div>
+                    <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
+                      {c.problem}
+                    </h2>
+                    <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                      {translated.problem_solved.map((prob: string, idx: number) => (
+                        <li key={idx} style={{ marginBottom: "0.5rem" }}>{prob}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Features (If available) */}
+                {translated?.features && Array.isArray(translated.features) && (
+                  <div>
+                    <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
+                      {c.features}
+                    </h2>
+                    <ul style={{ listStyleType: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
+                      {translated.features.map((feat: { title: string, desc: string }, idx: number) => (
+                        <li key={idx} style={{ display: "flex", flexDirection: "column" }}>
+                          <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{feat.title}</span>
+                          <span style={{ fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{feat.desc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Tech Stack */}
+                <div>
+                  <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
+                    {c.techStack}
+                  </h2>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                    {meta.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        style={{
+                          padding: "0.35rem 0.85rem",
+                          background: "rgba(255,255,255,0.04)",
+                          border: "1px solid var(--border)",
+                          borderRadius: "100px",
+                          fontSize: "0.82rem",
+                          color: "var(--text-muted)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </>
             )}
-
-            {/* Problems Solved (If available) */}
-            {translated?.problem_solved && Array.isArray(translated.problem_solved) && (
-              <div>
-                <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
-                  {c.problem}
-                </h2>
-                <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-                  {translated.problem_solved.map((prob: string, idx: number) => (
-                    <li key={idx} style={{ marginBottom: "0.5rem" }}>{prob}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Features (If available) */}
-            {translated?.features && Array.isArray(translated.features) && (
-              <div>
-                <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
-                  {c.features}
-                </h2>
-                <ul style={{ listStyleType: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {translated.features.map((feat: { title: string, desc: string }, idx: number) => (
-                    <li key={idx} style={{ display: "flex", flexDirection: "column" }}>
-                      <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{feat.title}</span>
-                      <span style={{ fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{feat.desc}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Tech Stack */}
-            <div>
-              <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}>
-                {c.techStack}
-              </h2>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {meta.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    style={{
-                      padding: "0.35rem 0.85rem",
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "100px",
-                      fontSize: "0.82rem",
-                      color: "var(--text-muted)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
           </div>
         </div>
       </main>
