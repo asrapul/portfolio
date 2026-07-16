@@ -53,6 +53,7 @@ export default function Contact() {
     { id: "social-github",    label: "GitHub",    handle: "@asrapul",            href: "https://github.com/asrapul",                     icon: <FiGithub size={20} /> },
     { id: "social-linkedin",  label: "LinkedIn",  handle: "in/andiasyraful",     href: "https://www.linkedin.com/in/andiasyraful/",       icon: <FiLinkedin size={20} /> },
     { id: "social-instagram", label: "Instagram", handle: "@asrapulamal",        href: "https://www.instagram.com/asrapulamal/",          icon: <FiInstagram size={20} /> },
+    { id: "social-medium",    label: "Medium",    handle: "@AndiAsyraful",       href: "https://medium.com/@AndiAsyraful",                icon: <svg width={20} height={20} viewBox="0 0 1043.63 592.71" fill="currentColor"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36" /><path d="M911.56 296.36c0 154.06-65.89 278.92-147.17 278.92s-147.17-124.86-147.17-278.92S683.1 17.44 764.39 17.44s147.17 124.85 147.17 278.92" /><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94" /></svg> },
     { id: "social-email",     label: "Email",     handle: "asyrafulamal06@gmail.com", href: "mailto:asyrafulamal06@gmail.com",            icon: <FiMail size={20} /> },
   ];
 

@@ -9,6 +9,7 @@ const socials = [
   { href: "https://github.com/asrapul", label: "GitHub", icon: <FiGithub size={15} /> },
   { href: "https://www.linkedin.com/in/andiasyraful/", label: "LinkedIn", icon: <FiLinkedin size={15} /> },
   { href: "https://www.instagram.com/asrapulamal/", label: "Instagram", icon: <FiInstagram size={15} /> },
+  { href: "https://medium.com/@AndiAsyraful", label: "Medium", icon: <svg width={15} height={15} viewBox="0 0 1043.63 592.71" fill="currentColor"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36" /><path d="M911.56 296.36c0 154.06-65.89 278.92-147.17 278.92s-147.17-124.86-147.17-278.92S683.1 17.44 764.39 17.44s147.17 124.85 147.17 278.92" /><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94" /></svg> },
 ];
 
 const navKeys = ["home", "about", "skills", "experience", "contact"] as const;
