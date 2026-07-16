@@ -42,7 +42,7 @@ const projectsMeta: Record<string, {
     id: "tk-mitra-bunda",
     stack: ["React 19", "Next.js App Router", "Tailwind CSS 4", "Supabase", "html5-qrcode"],
     color: "#27c93f",
-    demo: "https://absensi-demo.vercel.app/",
+    demo: "https://web-absensi-test.vercel.app/",
     source: "No Code Source",
     gradient: "linear-gradient(135deg, rgba(39,201,63,0.2) 0%, rgba(0,0,0,0) 100%)",
     date: "August 2026",

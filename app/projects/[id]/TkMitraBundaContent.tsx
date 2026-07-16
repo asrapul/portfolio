@@ -167,12 +167,12 @@ export default function TkMitraBundaContent() {
               {isId ? "🌐 Akses Website: " : "🌐 Website Access: "}
             </strong>
             <a
-              href="https://absensi-demo.vercel.app/"
+              href="https://web-absensi-test.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "var(--accent-light)", textDecoration: "underline" }}
             >
-              absensi-demo.vercel.app
+              web-absensi-test.vercel.app
             </a>
           </p>
         </div>
