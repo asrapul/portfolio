@@ -46,7 +46,7 @@ const projectsMeta: Record<string, {
     source: "No Code Source",
     gradient: "linear-gradient(135deg, rgba(39,201,63,0.2) 0%, rgba(0,0,0,0) 100%)",
     date: "August 2026",
-    image: "/tk-MitraBunda/Dashboard-Absensi.png",
+    image: "/tk-MitraBunda/thumbnail-tkmitrabunda.png",
     imgWidth: 1920,
     imgHeight: 1080,
     browserUrl: "absensi-demo.vercel.app",

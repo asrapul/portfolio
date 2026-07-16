@@ -172,6 +172,23 @@ export default function TkMitraBundaContent() {
         <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
       </div>
 
+      {/* ── Project description ───────────────────────────────────────── */}
+      <div>
+        <h2 style={headingStyle}>
+          {isId ? "Tentang Proyek" : "About the Project"}
+        </h2>
+        <p style={textStyle}>
+          {isId
+            ? "Sistem Absensi TK Mitra Bunda adalah aplikasi web full-stack yang mendigitalkan seluruh proses absensi taman kanak-kanak — mulai dari pencatatan kedatangan siswa di pagi hari, kepulangan di siang hari, hingga ekspor laporan bulanan ke Excel. Dibangun sebagai proyek nyata untuk klien institusi pendidikan, sistem ini menggantikan pencatatan manual berbasis kertas yang memakan waktu dan rawan human error."
+            : "The TK Mitra Bunda Attendance System is a full-stack web application that fully digitalizes the kindergarten attendance process — from recording student arrivals in the morning, departures at noon, to exporting monthly reports to Excel. Built as a real client project for an educational institution, this system replaces slow and error-prone manual paper-based attendance recording."}
+        </p>
+        <p style={textStyle}>
+          {isId
+            ? "Dengan teknologi QR Code dan Text-to-Speech, guru cukup meletakkan tablet di gerbang sekolah — sistem bekerja secara otomatis tanpa perlu interaksi manual. Admin dapat memantau, mengelola, dan mengunduh laporan kapan saja dari perangkat apa pun."
+            : "Using QR Code and Text-to-Speech technology, teachers simply place a tablet at the school gate — the system works automatically without manual interaction. Admins can monitor, manage, and download reports at any time from any device."}
+        </p>
+      </div>
+
       {/* ── Intro ─────────────────────────────────────────────────────── */}
       <div>
         <h2 style={headingStyle}>

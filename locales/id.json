@@ -62,7 +62,21 @@
       {
         "id": "burger-loin",
         "title": "Burger Loin",
-        "description": "Sebuah website modern untuk penjual burger lokal"
+        "description": "Sebuah website modern untuk penjual burger lokal",
+        "overview": "Burger Loin adalah landing page modern dan responsif yang dibangun untuk brand burger lokal. Dirancang agar terlihat premium dan membangun kepercayaan pelanggan, situs ini menampilkan menu, kisah brand, dan mengintegrasikan alur pemesanan langsung via WhatsApp — memungkinkan pelanggan memesan dalam hitungan detik tanpa perlu aplikasi mobile khusus.",
+        "target": "Usaha makanan & minuman lokal yang ingin membangun kehadiran online dan mengkonversi followers media sosial menjadi pelanggan nyata melalui WhatsApp.",
+        "problem_solved": [
+          "Tidak ada kehadiran online untuk bisnis street food fisik.",
+          "Pelanggan tidak memiliki cara mudah untuk melihat menu atau memesan dari jauh.",
+          "Penerimaan pesanan manual lewat chat lambat dan tidak konsisten.",
+          "Kesulitan membangun kredibilitas dan kepercayaan brand kepada pelanggan baru."
+        ],
+        "features": [
+          { "title": "Desain Responsif Modern", "desc": "Tata letak pixel-perfect yang dioptimalkan untuk browsing mobile-first, sesuai estetika brand yang berani dan menggugah selera." },
+          { "title": "Tampilan Menu Interaktif", "desc": "Tampilan menu lengkap dengan nama item, deskripsi, dan harga yang disajikan dalam tata letak kartu yang bersih dan mudah dipindai." },
+          { "title": "Integrasi Pemesanan WhatsApp", "desc": "Tombol 'Pesan Sekarang' satu ketuk yang mengisi pesan WhatsApp secara otomatis dengan pesanan pelanggan, menghilangkan hambatan dalam alur pembelian." },
+          { "title": "Brand Storytelling", "desc": "Bagian khusus yang menyajikan kisah dan nilai brand untuk membangun koneksi emosional dan kepercayaan dengan pengunjung baru." }
+        ]
       },
       {
         "id": "tk-mitra-bunda",

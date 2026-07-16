@@ -62,7 +62,21 @@
       {
         "id": "burger-loin",
         "title": "Burger Loin",
-        "description": "A modern website for a local street burger vendor"
+        "description": "A modern website for a local street burger vendor",
+        "overview": "Burger Loin is a modern, responsive landing page built for a local street burger brand. Designed to look premium and build trust with customers, the site showcases the menu, brand story, and integrates a direct WhatsApp ordering flow — allowing customers to place orders in seconds without a dedicated mobile app.",
+        "target": "Local food & beverage businesses looking to establish an online presence and convert social media followers into paying customers via WhatsApp.",
+        "problem_solved": [
+          "No online presence for a physical street food business.",
+          "Customers had no easy way to see the menu or place orders remotely.",
+          "Manual order-taking via chat was slow and inconsistent.",
+          "Difficulty building brand credibility and trust with new customers."
+        ],
+        "features": [
+          { "title": "Modern Responsive Design", "desc": "Pixel-perfect layout optimized for mobile-first browsing, matching the brand's bold and appetizing aesthetic." },
+          { "title": "Interactive Menu Showcase", "desc": "Full menu display with item names, descriptions, and pricing presented in a clean, scannable card layout." },
+          { "title": "WhatsApp Order Integration", "desc": "One-tap 'Order Now' button that pre-fills a WhatsApp message with the customer's order, removing friction in the purchase flow." },
+          { "title": "Brand Storytelling", "desc": "Dedicated section presenting the brand story and values to build emotional connection and trust with new visitors." }
+        ]
       },
       {
         "id": "tk-mitra-bunda",
